@@ -110,6 +110,7 @@ module.exports = {
     const total = Object.keys(SLOTS).length;
     const summary = `${total - missing.length}/${total} Fotos geladen.` + (missing.length ? ` Fehlend (Platzhalter): ${missing.join(", ")}` : "");
     console.log(summary);
+    const report = [];
     // Optional: Fotos zur visuellen Kontrolle in eine Figma-Datei hochladen (einmalige Upload-URLs per Env-Var)
     if (process.env.PHOTO_CHECK_URLS) {
       const urls = JSON.parse(process.env.PHOTO_CHECK_URLS);
@@ -119,12 +120,14 @@ module.exports = {
           const form = new FormData();
           form.append("file", new Blob([fs.readFileSync(path.join(OUT, `${sl}-${SIZES[0]}.jpg`))], { type: "image/jpeg" }), `${sl}.jpg`);
           const r = await fetch(urls[i], { method: "POST", body: form });
-          console.log(`  Figma-Check ${sl}: ${r.status}`);
+          report.push(`${sl}:${r.status}${r.ok ? "" : " " + (await r.text()).slice(0, 120)}`);
         } catch (e) {
-          console.log(`  Figma-Check ${sl}: ${e.message}`);
+          report.push(`${sl}:ERR ${e.message}`);
         }
       }));
     }
     utils.status.show({ title: "Fotos", summary, text: JSON.stringify(credits) });
+    // Diagnose: Build bewusst abbrechen, damit das Ergebnis in der Deploy-Fehlermeldung steht (Live-Seite bleibt unverändert)
+    if (process.env.PHOTO_REPORT) utils.build.failBuild(`REPORT ${summary} | Figma: ${report.join("; ") || "keine URLs"} | Credits: ${Object.entries(credits).map(([k, v]) => k + "=" + v.title).join("; ")}`);
   },
 };
