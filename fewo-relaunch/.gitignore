@@ -1,1 +1,4 @@
 .netlify
+# lokal geladene Fotos (werden auf Netlify beim Build geladen)
+assets/photos/
+__pycache__/

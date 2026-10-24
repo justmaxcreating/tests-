@@ -19,6 +19,22 @@ python3 -m http.server 8000
 
 Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, verschickt nichts). Fotos gibt es lokal nur, wenn `assets/photos/` befüllt ist – sonst erscheinen Farbflächen als Platzhalter.
 
+## Am Laptop weiterarbeiten
+
+```bash
+git clone https://github.com/justmaxcreating/tests-.git
+cd tests-
+git checkout fewo-relaunch
+cd fewo-relaunch
+node tools/fetch-photos-local.js   # Fotos laden (einmalig, braucht Internet)
+python3 -m http.server 8000         # → http://localhost:8000
+```
+
+**Inhalte ändern:** Texte, Wohnungen, FAQ und Bewertungen stehen in `tools/gen/home.py` und `tools/gen/detail.py`, gemeinsame Bausteine (Header, Footer, Icons, Bilder, Kalender) in `tools/gen/parts.py`. Danach `python3 tools/gen/build.py` – das erzeugt beide HTML-Seiten neu. Bitte nicht direkt im HTML ändern, sonst überschreibt der nächste Build die Änderung.
+Styles: `css/styles.css`, Interaktionen: `js/main.js` (beide direkt bearbeiten).
+
+**Veröffentlichen:** Jeder Push auf den Branch `fewo-relaunch` landet automatisch auf https://fewo-relaunch-vorschau.netlify.app/.
+
 ## Struktur
 
 ```
@@ -31,6 +47,8 @@ fewo-relaunch/
 ├── assets/photos/                wird beim Netlify-Build befüllt (nicht im Repo)
 ├── assets/favicon.svg
 ├── plugins/fetch-photos/         Netlify-Build-Plugin: lädt Fotos + Bildnachweise
+├── tools/gen/                    Seiten-Generator (Inhalte → HTML)
+├── tools/fetch-photos-local.js   Fotos lokal laden
 ├── robots.txt, sitemap.xml
 ├── _redirects                    301-Weiterleitungen alte → neue URLs (Netlify)
 └── preview/                      Screenshots für die Präsentation
@@ -63,7 +81,7 @@ Zwei Bausteine sind nach Vorlagen von [21st.dev](https://21st.dev) gebaut und in
 - **Würzburg, Weinberge, Schloss Thüngen, Eichenholz:** echte Motive von Wikimedia Commons (CC-Lizenzen). Urheber und Lizenz werden automatisch in `credits.json` geschrieben und im Footer unter „Bildnachweise“ angezeigt.
 - **Innenräume:** **Beispielbilder von Unsplash** – nicht die echten Wohnungen. Darauf weist der Hinweisbalken oben auf der Seite hin.
 
-**Echte Fotos einsetzen:** Datei unter dem Slot-Namen nach `assets/photos/` legen (beide Größen) und committen – das Plugin überschreibt vorhandene Dateien nicht. Die Fotos der Gastgeber liegen u. a. auf Booking.com und FeWo-direkt. Danach den Hinweisbalken (`.preview-bar`) entfernen.
+**Echte Fotos einsetzen:** Datei unter dem Slot-Namen nach `assets/photos/` legen (beide Größen) und mit `git add -f` committen (der Ordner ist sonst ignoriert, damit lokal geladene Beispielbilder nicht im Repo landen) – das Plugin überschreibt vorhandene Dateien nicht. Die Fotos der Gastgeber liegen u. a. auf Booking.com und FeWo-direkt. Danach den Hinweisbalken (`.preview-bar`) entfernen.
 
 ## SEO-Maßnahmen
 
