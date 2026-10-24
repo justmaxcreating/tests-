@@ -1,0 +1,5 @@
+# Netlify: Seite liegt im Unterordner fewo-relaunch/ (statisch, kein Build)
+[build]
+  base = "fewo-relaunch"
+  publish = "."
+  command = ""
