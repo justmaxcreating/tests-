@@ -79,3 +79,11 @@ with open(os.path.join(OUT, "_redirects"), "w", encoding="utf-8") as f:
     f.write("\n".join(lines) + "\n")
 
 print(f"{len(written)} Seiten in der Sitemap, {len(rules) * 3} Weiterleitungen, indexierbar: {INDEXABLE}")
+
+from reviews import CHECKS  # noqa: E402
+open_checks = sum(len(v) for v in CHECKS.values())
+if open_checks:
+    print(f"ACHTUNG: {open_checks} offene Prüfpunkte in tools/gen/reviews.py (CHECKS) – vor Go-live mit den Gastgebern klären:")
+    for page, items in CHECKS.items():
+        for t in items:
+            print(f"  · {page}: {t}")

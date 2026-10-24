@@ -6,6 +6,8 @@ Fotos: assets/fewo/<id>/NN.jpg (echte Fotos der Gastgeber, Reihenfolge = Reihenf
 """
 import math
 
+from reviews import CHECKS, REVIEWS, SOURCE
+
 # ---------- Orte für Entfernungen und Karten (per Nominatim ermittelt) ----------
 LANDMARKS = {
     "dom": ("Dom St. Kilian", 49.79341, 9.93231),
@@ -59,7 +61,7 @@ APARTMENTS = [
         floor="2. Stock, kein Aufzug", floor_level="2", elevator=False,
         size=50, guests=4, bedrooms=1, beds=[("Doppelbett", 1), ("Schlafcouch", 1)],
         sleep=[("Schlafzimmer", "1 Doppelbett", None), ("Wohnzimmer", "Ausziehbare Schlafcouch", "02")],
-        pets=False, parking="talavera", rating=("9,6", "FeWo-direkt"), badge="Im Riemenschneider-Haus",
+        pets=False, parking="talavera", rating=None, badge="Im Riemenschneider-Haus",
         tags="wuerzburg",
         lead="Wohnen im Haus des Bildhauers Tilman Riemenschneider – zwischen Dom und Alter Mainbrücke.",
         highlights=[("church", "Wohnen mit Geschichte", "Der Bildhauer Tilman Riemenschneider lebte und arbeitete in diesem Haus.")],
@@ -265,7 +267,7 @@ APARTMENTS = [
         floor="1. oder 2. Etage, kein Aufzug", floor_level=None, elevator=False,
         size=65, guests=6, bedrooms=1, beds=[("Doppelbett", 1), ("Schlafcouch", 2)],
         sleep=[("Schlafzimmer", "1 Doppelbett, großer Schrank", "05"), ("Wohnzimmer", "2 Schlafcouches", "04")],
-        pets=True, parking="own", rating=("9,1", "Booking.com · Haus am Schlossberg"), badge="Hunde willkommen",
+        pets=True, parking="own", rating=None, badge="Hunde willkommen",
         tags="thuengen hund gruppe parkplatz",
         lead="65 m² für bis zu sechs – mit Hund, Garten am Bach und Weinbergen vor der Tür.",
         highlights=[("users", "Platz für die ganze Familie", "Schlafzimmer mit Doppelbett, dazu zwei Schlafcouches im großen Wohnzimmer.")],
@@ -290,7 +292,7 @@ APARTMENTS = [
         floor="1. oder 2. Etage, kein Aufzug", floor_level=None, elevator=False,
         size=65, guests=6, bedrooms=1, beds=[("Doppelbett", 1), ("Schlafcouch", 2)],
         sleep=[("Schlafzimmer", "1 Doppelbett, großer Schrank", "05"), ("Wohnzimmer", "2 Schlafcouches", "01")],
-        pets=True, parking="own", rating=("9,1", "Booking.com · Haus am Schlossberg"), badge="",
+        pets=True, parking="own", rating=None, badge="",
         tags="thuengen hund gruppe parkplatz",
         lead="Langer Tisch für sechs, viel Licht und der Garten an der Wern – Familienurlaub am Schlossberg.",
         highlights=[("users", "Ein Tisch für alle", "Am langen Esstisch aus Eiche finden sechs Personen bequem Platz.")],
@@ -315,7 +317,7 @@ APARTMENTS = [
         floor="1. oder 2. Etage, kein Aufzug", floor_level=None, elevator=False,
         size=65, guests=4, bedrooms=1, beds=[("Doppelbett", 1), ("Schlafcouch", 1)],
         sleep=[("Schlafzimmer", "1 Doppelbett, großer Schrank", "04"), ("Wohnzimmer", "1 Schlafcouch", "02")],
-        pets=True, parking="own", rating=("9,1", "Booking.com · Haus am Schlossberg"), badge="",
+        pets=True, parking="own", rating=None, badge="",
         tags="thuengen hund parkplatz",
         lead="Holzbalken, viel Licht und Platz für vier – mit Hund, Garten und Parkplatz am Haus.",
         highlights=[("sparkle", "Unter alten Holzbalken", "Ein offener Wohn- und Essbereich mit sichtbaren Balken und Eichen-Unikaten.")],
@@ -381,6 +383,9 @@ def finalize(a):
     parts = ([f"{a['size']} m²"] if a["size"] else []) + [f"{a['bedrooms']} Schlafzimmer" if a["bedrooms"] == 1 else f"{a['bedrooms']} Schlafzimmer", g]
     a["facts"] = " · ".join(parts)
     a["unit"] = ("Würzburg – " if a["city"] == "wuerzburg" else "Thüngen – ") + a["name"]
+    a["review"] = REVIEWS.get(a["id"])
+    a["rating"] = (a["review"]["score"], SOURCE) if a["review"] else None
+    a["checks"] = CHECKS.get(a["id"], [])
     if a["city"] == "wuerzburg":
         keys = ["dom", "markt", "bruecke", "residenz", "kranen", "hbf", "ccw", "theater"] + ([] if a["parking"] == "own" else ["talavera"])
         d = [(LANDMARKS[k][0], *walk(a["geo"], LANDMARKS[k][1:]), k) for k in keys]

@@ -730,3 +730,39 @@ a.tile:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
 .avatars img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 3px solid var(--surface); background: var(--sunken); }
 .avatars img + img { margin-left: -16px; }
 .host-row .avatars img { width: 46px; height: 46px; }
+
+/* Bewertungen (Booking-Noten + Zusammenfassung in eigenen Worten) */
+a.score-box { color: inherit; transition: box-shadow 0.2s; }
+a.score-box:hover { box-shadow: inset 0 0 0 1px var(--ink), var(--shadow-1); }
+.rv-sum { display: grid; gap: 20px 40px; align-items: center; padding: 22px 24px; border-radius: var(--r-lg); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+@media (min-width: 600px) { .rv-sum { grid-template-columns: auto 1fr; } }
+.rv-big { display: grid; justify-items: start; line-height: 1.1; }
+.rv-big strong { font-size: 3rem; font-weight: 750; letter-spacing: -0.05em; }
+.rv-big > span { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+.rv-big small { margin-top: 8px; font-size: 0.85rem; color: var(--ink-2); line-height: 1.35; }
+.rv-cats { display: grid; gap: 10px; }
+.rv-cats li { display: grid; grid-template-columns: 96px 1fr 34px; gap: 12px; align-items: center; font-size: 0.92rem; color: var(--ink-2); }
+.rv-cats strong { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+.rv-bar { height: 6px; border-radius: 99px; background: var(--sunken); overflow: hidden; }
+.rv-bar i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.rv-sub { margin: 28px 0 14px; font-size: 1rem; }
+.rv-praise { display: grid; gap: 12px; }
+@media (min-width: 600px) { .rv-praise { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+.rv-praise li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-2); }
+.rv-praise svg { flex: none; margin-top: 3px; color: var(--accent); }
+.rv-heads { display: flex; gap: 12px; align-items: flex-start; margin: 22px 0 0; padding: 14px 16px; border-radius: var(--r-md); background: var(--sunken); font-size: 0.92rem; color: var(--ink-2); }
+.rv-heads svg { flex: none; margin-top: 2px; }
+#bewertungen > .btn { margin-top: 24px; }
+.rv-legal { margin-top: 16px; font-size: 0.78rem; line-height: 1.5; color: var(--muted); max-width: 72ch; }
+.rv .rv-legal { margin-top: 24px; }
+a.rv-card { color: inherit; }
+.rv-text { margin: 0; font-size: 1.05rem; line-height: 1.45; letter-spacing: -0.01em; color: var(--ink); }
+.rv-cap { display: flex; align-items: center; gap: 12px; margin-top: auto; font-size: 0.86rem; color: var(--muted); line-height: 1.35; }
+.rv-cap strong { color: var(--ink); font-weight: 650; }
+
+/* Prüfkasten (nur Vorschau) */
+.check-box { display: flex; gap: 14px; align-items: flex-start; margin: 20px 0 0; padding: 16px 18px; border-radius: var(--r-md); background: #fff6df; box-shadow: inset 0 0 0 1px #eedca8; color: #5c4712; font-size: 0.92rem; }
+.check-box svg { flex: none; margin-top: 2px; color: #b8860b; }
+.check-box strong { display: block; color: #3d2f0c; margin-bottom: 6px; }
+.check-box ul { list-style: disc; padding-left: 1.1em; display: grid; gap: 4px; }
+.check-box small { display: block; margin-top: 8px; color: #8a6d1f; }

@@ -1,5 +1,6 @@
 from cards import card
-from data import APARTMENTS
+from data import APARTMENTS, BY_ID
+from reviews import AS_OF, HOST, SOURCE, UWG_NOTE
 from pages import host_card
 from parts import *
 
@@ -15,16 +16,22 @@ REGION = [
     ("volkach-mainschleife", "Volkach", "Weindorf an der Mainschleife.", "ausfluege/#weinland"),
 ]
 
-# Bewertungen: nur belegbare Angaben. Echte Gästezitate später in "quote" eintragen
-# (z. B. mit Einverständnis aus Booking.com/FeWo-direkt übernommen), "summary" dann auf False setzen.
-REVIEWS = [
-    dict(score="9,1", source="Booking.com", place="Wohnen am Schlossberg, Thüngen", count="26 Bewertungen",
-         quote="Besonders oft gelobt: die Gastgeber.", summary=True),
-    dict(score="9,6", source="FeWo-direkt", place="Tilman-Riemenschneider-Haus, Würzburg", count="",
-         quote="Für die Altstadtwohnung im Haus des Bildhauers Tilman Riemenschneider.", summary=False),
-    dict(score="8,6", source="Gîtes.fr", place="Wohnen am Schlossberg, Thüngen", count="34 Bewertungen",
-         quote="Auch auf dem französischen Ferienportal gut bewertet.", summary=False),
-]
+# Bewertungen: Noten von Booking.com (reviews.py), Text = Zusammenfassung in eigenen Worten, keine Zitate.
+# Echte Gästezitate nur mit Einverständnis der Gäste ergänzen.
+def review_items():
+    seen, items = set(), []
+    for a in APARTMENTS:
+        rv = a["review"]
+        if not rv or rv["url"] in seen:
+            continue
+        seen.add(rv["url"])
+        name = "Wohnen am Schlossberg" if a["city"] == "thuengen" else a["name"]
+        path = "thuengen/" if a["city"] == "thuengen" else a["path"]
+        items.append(dict(score=rv["score"], name=name, place=a["town"], count=rv["count"], path=path,
+                          text=f"{rv['praise'][0]}. {rv['praise'][1]}."))
+    return sorted(items, key=lambda r: -float(r["score"].replace(",", ".")))
+
+
 MARQUEE = ["Check-in ab 15 Uhr", "Hunde in Thüngen willkommen", "Kostenloses WLAN", "Parken am Haus in Thüngen",
            "Babybett in allen Würzburger Wohnungen", "Waschmaschine in Würzburg", "Möbel aus eigener Eiche", "Direkt beim Gastgeber"]
 
@@ -53,13 +60,11 @@ JSONLD = [
 
 
 def review_card(r):
-    note = '<span class="rv-note">Zusammenfassung</span>' if r.get("summary") else ""
-    count = f' · {r["count"]}' if r["count"] else ""
-    return f"""            <figure class="rv-card">
+    return f"""            <a class="rv-card" href="{r["path"]}">
               <div class="rv-score"><strong>{r["score"]}</strong><span>/ 10</span>{icon("star", 14)}</div>
-              <blockquote>{r["quote"]}</blockquote>
-              <figcaption><span class="rv-src">{r["source"][0]}</span><span><strong>{r["source"]}</strong><br>{r["place"]}{count}</span>{note}</figcaption>
-            </figure>"""
+              <p class="rv-text">{r["text"]}</p>
+              <span class="rv-cap"><span class="rv-src">B</span><span><strong>{r["name"]}</strong><br>{r["count"]} Bewertungen · {SOURCE}</span><span class="rv-note">Zusammenfassung</span></span>
+            </a>"""
 
 
 def inquiry_form(prefix):
@@ -101,7 +106,7 @@ def build():
     n_wue = sum(a["city"] == "wuerzburg" for a in APARTMENTS)
     n_thue = sum(a["city"] == "thuengen" for a in APARTMENTS)
     cards = "\n".join(card(P, a, (i % 3) * 0.06) for i, a in enumerate(APARTMENTS))
-    reviews = "\n".join(review_card(r) for r in REVIEWS)
+    reviews = "\n".join(review_card(r) for r in review_items())
     marquee = "".join(f'<span>{icon("check", 16)}{m}</span>' for m in MARQUEE * 2)
     marquee_label = "Auf einen Blick: " + ", ".join(MARQUEE)
     region = "\n".join(
@@ -144,8 +149,8 @@ def build():
 
   <div class="container">
     <div class="trust">
-      <div><strong>{icon("star", 18)} 9,1</strong><span>Booking.com · Thüngen</span></div>
-      <div><strong>{icon("star", 18)} 9,6</strong><span>FeWo-direkt · Würzburg</span></div>
+      <div><strong>{icon("star", 18)} {HOST["score"]}</strong><span>{SOURCE} · {HOST["count"]} Bewertungen</span></div>
+      <div><strong>{icon("star", 18)} {BY_ID["wue-herzstueck"]["review"]["score"]}</strong><span>Herzstück der Altstadt</span></div>
       <div><strong>150+ Jahre</strong><span>Familienbetrieb in Thüngen</span></div>
       <div><strong>Direkt</strong><span>ohne Portal-Servicegebühr</span></div>
     </div>
@@ -269,6 +274,7 @@ def build():
         <div class="rv-marquee" role="group" aria-label="{marquee_label}">
           <div class="rv-marquee-row" aria-hidden="true">{marquee}</div>
         </div>
+        <p class="rv-legal">Insgesamt {HOST["score"]} von 10 aus {HOST["count"]} Bewertungen für unsere Unterkünfte auf {SOURCE}. {UWG_NOTE}</p>
       </div>
     </div>
   </section>

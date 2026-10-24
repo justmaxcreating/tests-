@@ -125,6 +125,16 @@ def slider(prefix, photos, sizes, extra=""):
     )
 
 
+def checks_box(items):
+    """Gelber Hinweis in der Vorschau: Angaben, die sich widersprechen und von den Gastgebern bestätigt werden müssen.
+    Pflege in reviews.py (CHECKS); ein leerer Eintrag blendet den Kasten aus."""
+    if not items or INDEXABLE:  # live nie zeigen – build.py warnt stattdessen
+        return ""
+    lis ="".join(f"<li>{t}</li>" for t in items)
+    return (f'<aside class="check-box" role="note">{icon("sparkle", 20)}<div><strong>Vor Veröffentlichung mit den Gastgebern klären</strong>'
+            f'<ul>{lis}</ul><small>Nur in der Vorschau sichtbar, solange der Punkt offen ist.</small></div></aside>')
+
+
 def avatars(prefix):
     """Kleine Fotos der Gastgeber – rein schmückend, der Name steht im Text daneben."""
     return ('<div class="avatars" aria-hidden="true">'

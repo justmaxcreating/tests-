@@ -1,6 +1,7 @@
 """Übersichtsseiten /wuerzburg/ und /thuengen/ – die wichtigsten Einstiegsseiten für die Google-Suche."""
 from cards import card, compare_table
-from data import APARTMENTS
+from data import APARTMENTS, BY_ID
+from reviews import CHECKS, SOURCE, THUENGEN as THUE_RV
 from maps import city_map, region_map
 from parts import *
 
@@ -71,7 +72,7 @@ def build_wuerzburg():
     <div class="trust">
       <div><strong>8</strong><span>Wohnungen in der Stadt</span></div>
       <div><strong>35–60 m²</strong><span>2 bis 8 Gäste</span></div>
-      <div><strong>{icon("star", 18)} 9,6</strong><span>FeWo-direkt · Herzstück</span></div>
+      <div><strong>{icon("star", 18)} {BY_ID["wue-herzstueck"]["review"]["score"]}</strong><span>{SOURCE} · Herzstück der Altstadt</span></div>
       <div><strong>Direkt</strong><span>ohne Portal-Servicegebühr</span></div>
     </div>
   </div>
@@ -151,7 +152,7 @@ def build_thuengen():
 {header(P, "thuengen")}
 
 <main id="main">
-  <div class="container page-top">{crumbs(P, [("Ferienwohnungen", ""), ("Thüngen", None)])}</div>
+  <div class="container page-top">{crumbs(P, [("Ferienwohnungen", ""), ("Thüngen", None)])}{checks_box(CHECKS.get("thuengen", []))}</div>
   <section class="hero hero--page" aria-labelledby="hero-title">
     <div class="hero-frame">
       {img(P, "thue-schloss", "Schloss Thüngen über dem Ort im Werntal", "100vw", eager=True)}
@@ -165,7 +166,7 @@ def build_thuengen():
 
   <div class="container">
     <div class="trust">
-      <div><strong>{icon("star", 18)} 9,1</strong><span>Booking.com · Haus am Schlossberg</span></div>
+      <div><strong>{icon("star", 18)} {THUE_RV["score"]}</strong><span>{SOURCE} · {THUE_RV["count"]} Bewertungen</span></div>
       <div><strong>65 m²</strong><span>bis 6 Gäste</span></div>
       <div><strong>{icon("paw", 18)} Ja</strong><span>Hunde willkommen</span></div>
       <div><strong>25 km</strong><span>bis Würzburg</span></div>

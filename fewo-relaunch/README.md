@@ -24,6 +24,7 @@ Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, ve
 | Was | Wo |
 |---|---|
 | Wohnungen (Texte, Eckdaten, Fotos, Alt-Texte) | `tools/gen/data.py` |
+| Bewertungen (Booking-Noten, Zusammenfassungen) und offene Prüfpunkte | `tools/gen/reviews.py` |
 | Startseite | `tools/gen/home.py` |
 | Übersichten Würzburg / Thüngen inkl. FAQ | `tools/gen/hub.py` |
 | Ausflüge, Kongress, Kontakt, Impressum, Datenschutz, 404 | `tools/gen/pages.py` |
@@ -123,6 +124,18 @@ Aufbau-Prinzipien von großen Buchungsplattformen übernommen, Optik eigenständ
 4. **Rechtliches:** Impressum ist ein Entwurf (E-Mail fehlt), die Datenschutzerklärung ein Platzhalter mit Stichpunkten.
 5. **Markenname:** „Voll – Ferienwohnungen in Franken“ ist ein **Vorschlag**. Auf den Portalen läuft Thüngen als „Wohnen am Schlossberg“, die Domain heißt fewo-urlaub.com. Name, Adresse und Telefon sollten überall identisch sein.
 6. **Hinweisbalken** „Designentwurf“ in `tools/gen/parts.py` (`header()`) entfernen.
+
+## Bewertungen
+
+- Noten, Anzahl und Teilnoten stammen von den **Booking.com-Inseraten** der Gastgeber (Stand Oktober 2026), gepflegt in `tools/gen/reviews.py`. Gastgeber gesamt: 9,2 aus 319 Bewertungen.
+- Die Stichpunkte sind **Zusammenfassungen in eigenen Worten**, keine Zitate. Bewertungstexte von Booking wörtlich zu übernehmen ist nicht erlaubt. Echte Gästezitate nur mit Einverständnis der Gäste.
+- Unter jeder Bewertung steht der **Hinweis nach § 5b UWG** (Herkunft und ob geprüft wird). Wortlaut vor Go-live rechtlich prüfen lassen.
+- Keine Bewertungen gefunden für Juliuspromenade II und Annastraße (das Booking-Inserat in der Annastraße 26 gehört einem anderen Vermieter).
+- Noten alle paar Monate aktualisieren: Booking zeigt ältere Bewertungen nicht mehr an, die Zahlen ändern sich.
+
+### Offene Prüfpunkte
+
+Widersprüche zwischen alter Website, Booking-Inseraten und Gästebewertungen stehen in `reviews.py` unter `CHECKS`. In der Vorschau erscheinen sie als **gelber Kasten** auf der betroffenen Seite, `build.py` listet sie bei jedem Build auf. Live (`INDEXABLE = True`) wird der Kasten nie gezeigt. Nach Klärung: Text in `data.py` korrigieren, Eintrag in `CHECKS` löschen.
 
 ## Inhalte zum Gegenprüfen
 

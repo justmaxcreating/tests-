@@ -6,6 +6,7 @@ from cards import card
 from data import APARTMENTS, OAK, RULES_THUE, RULES_WUE, meters, nearest
 from maps import city_map, region_map
 from parts import *
+from reviews import SOURCE, UWG_NOTE
 
 CITY = {"wuerzburg": ("Würzburg", "wuerzburg/"), "thuengen": ("Thüngen", "thuengen/")}
 
@@ -176,21 +177,37 @@ def build(a):
 
     meta = []
     if a["rating"]:
-        meta.append(f'<span class="rating">{icon("star", 14)} {a["rating"][0]} · {a["rating"][1].split(" · ")[0]}</span>')
+        meta.append(f'<span class="rating">{icon("star", 14)} {a["rating"][0]} · {a["review"]["count"]} Bewertungen</span>')
     meta.append(f'<span>{a["street"] + ", " if a["street"] != "Haus Kämpf" else "Haus Kämpf, "}{a["town"]}</span>')
     meta.append(f"<span>{a['floor'].split(',')[0]}</span>")
 
     beds_short = " + ".join(f"{n} {t}" if n > 1 else t for t, n in a["beds"])
     summary_line = " · ".join(([f"{a['guests_label']}"] + [f"{a['bedrooms']} Schlafzimmer", beds_short, "1 Bad"] + ([f"{a['size']} m²"] if a["size"] else [])))
-    score = ""
-    if a["rating"]:
-        src = a["rating"][1]
-        note = "Bewertung für das ganze Haus „Wohnen am Schlossberg“." if "Schlossberg" in src else "Sehr gut bewertet von Gästen."
-        score = f"""<div class="score-box">
-          <div class="big">{a["rating"][0]}<small>von 10</small></div>
-          <p><strong>Auf {src.split(" · ")[0]}.</strong><br>{note}</p>
-          {icon("sparkle", 28)}
-        </div>"""
+    score, reviews_html = "", ""
+    rv = a["review"]
+    if rv:
+        scope = f" {rv['scope']}" if rv.get("scope") else ""
+        score = f"""<a class="score-box" href="#bewertungen">
+          <div class="big">{rv["score"]}<small>von 10</small></div>
+          <p><strong>{rv["count"]} Bewertungen auf {SOURCE}</strong>{scope}.<br>Am besten bewertet: {", ".join(f"{c} {v}" for c, v in rv["cats"][:2])}</p>
+          {icon("right", 22)}
+        </a>"""
+        praise = "".join(f"<li>{icon('check', 18)}<span>{t}</span></li>" for t in rv["praise"])
+        cats = "".join(f'<li><span>{c}</span><span class="rv-bar"><i style="width:{float(v.replace(",", ".")) * 10:.0f}%"></i></span><strong>{v}</strong></li>' for c, v in rv["cats"])
+        heads = f'<p class="rv-heads">{icon("chat", 18)}<span><strong>Gut zu wissen aus den Bewertungen:</strong> {rv["heads_up"]}</span></p>' if rv["heads_up"] else ""
+        reviews_html = f"""
+      <section aria-labelledby="h-rv" id="bewertungen">
+        <h2 id="h-rv">Was Gäste sagen</h2>
+        <div class="rv-sum">
+          <div class="rv-big"><strong>{rv["score"]}</strong><span>von 10</span><small>{rv["count"]} Bewertungen<br>auf {SOURCE}</small></div>
+          <ul class="rv-cats">{cats}</ul>
+        </div>
+        <h3 class="rv-sub">Das heben Gäste besonders hervor</h3>
+        <ul class="rv-praise">{praise}</ul>
+        {heads}
+        <a class="btn btn--light btn--sm" href="{rv["url"]}" target="_blank" rel="noopener">Alle Bewertungen auf {SOURCE} {icon("arrow", 14, "go")}</a>
+        <p class="rv-legal">{UWG_NOTE}</p>
+      </section>"""
 
     feats = "".join(f'<div class="feature">{icon(i, 26)}<div><strong>{t}</strong><p>{d}</p></div></div>' for i, t, d in features(a))
     about = "".join(f"<p>{p}</p>" for p in a["about"])
@@ -282,6 +299,7 @@ def build(a):
     <div class="gallery-mobile">{mobile}<span class="gallery-count">1 / {len(slots)}</span></div>
   </div>
 
+  {checks_box(a["checks"])}
   <div class="detail-layout">
     <div class="detail-main">
       <section class="summary">
@@ -315,6 +333,7 @@ def build(a):
         {more_btn}
       </section>
 
+{reviews_html}
       <section aria-labelledby="h-cal" id="kalender">
         <h2 id="h-cal" style="margin-bottom:4px"><span data-show="nights" data-empty="Zeitraum wählen">Zeitraum wählen</span></h2>
         <p class="muted" style="margin-bottom:20px"><span data-show="range" data-empty="Wählen Sie An- und Abreise – wir prüfen die Verfügbarkeit persönlich.">Wählen Sie An- und Abreise</span></p>
