@@ -1,0 +1,18 @@
+# 301-Weiterleitungen von der alten fewo-urlaub.com-Struktur (Netlify-Format).
+# Erhält Rankings & Backlinks. Vor Go-live mit dem Search-Console-Export der alten URLs abgleichen.
+
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-altstadt-wuerzburg   /wuerzburg/altstadt/   301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-altstadt   /wuerzburg/altstadt/   301
+/staedtereise-wuerzburg        /wuerzburg/altstadt/   301
+/staedtereise-wuerzburg.html   /wuerzburg/altstadt/   301
+
+# Thüngen hat noch keine eigenen Detailseiten → vorerst Startseite
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen     /   301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/*   /   301
+/ferien-fraenkisches-weinland                                     /   301
+/ferienwohnungen-fraenkisches-weinland/unterkunftsanfrage.html    /   301
+/kontakt-ferienwohnungen                                          /   301
+/kontakt-ferienwohnungen/eichenholz-produke-thuengen              /   301
+
+# Prüfen: ist diese Wohnung noch aktiv? Dann eigene Seite statt Startseite.
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-kulturspeicher   /   301
