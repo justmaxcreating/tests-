@@ -1,0 +1,670 @@
+{
+ "wue-herzstueck": [
+  {
+   "file": "01.jpg",
+   "w": 640,
+   "h": 480,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub001.JPG"
+  },
+  {
+   "file": "02.jpg",
+   "w": 906,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub002.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 397,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub003.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 397,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub004.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 203,
+   "h": 268,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub005.JPG"
+  },
+  {
+   "file": "06.jpg",
+   "w": 373,
+   "h": 366,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-herzstueck-altstadt__fewo-urlaub006.JPG"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "herzstueck-altstadt.jpg"
+  }
+ ],
+ "wue-im-herzen": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg000.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 1350,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 1350,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-im-herzen-der-altstadt__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "altstadt-herzen.jpg"
+  }
+ ],
+ "wue-julius-1": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse2__urlaubsunterkunft-ferienwohnungen-wuerzburg006.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "baerengasse1.jpg"
+  },
+  {
+   "file": "08.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "baerengasse2.jpg"
+  }
+ ],
+ "wue-julius-2": [
+  {
+   "file": "01.jpg",
+   "w": 600,
+   "h": 800,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__ferienwohnung-juliuspromenade-stadt-1.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg000.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohung-juliuspromenade__baerengasse1__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  }
+ ],
+ "wue-kulturspeicher": [
+  {
+   "file": "01.jpg",
+   "w": 846,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub000.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 847,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub001.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 853,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub002.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 855,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub003.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 845,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub004.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 853,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-kulturspeicher__fewo-urlaub005.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "kulturspeicher.jpg"
+  }
+ ],
+ "wue-ringpark": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 1350,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-ringpark__urlaubsunterkunft-ferienwohnungen-wuerzburg006.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "sanderglacisstraße.jpg"
+  }
+ ],
+ "wue-baeckerbrunnen": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg000.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-wuerzburg__ferienwohnung-am-baeckerbrunnen__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "semmelstrasse.jpg"
+  }
+ ],
+ "wue-annastrasse": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-annastrasse__kueche-essbereich-kuh-bild.jpg"
+  }
+ ],
+ "thue-elefant": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 604,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub001.JPG"
+  },
+  {
+   "file": "02.jpg",
+   "w": 904,
+   "h": 589,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub009.JPG"
+  },
+  {
+   "file": "03.jpg",
+   "w": 901,
+   "h": 602,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub012.JPG"
+  },
+  {
+   "file": "04.jpg",
+   "w": 907,
+   "h": 612,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub014.JPG"
+  },
+  {
+   "file": "05.jpg",
+   "w": 905,
+   "h": 611,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub018.JPG"
+  },
+  {
+   "file": "06.jpg",
+   "w": 906,
+   "h": 611,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__elefant__fewo-urlaub020.JPG"
+  }
+ ],
+ "thue-zebra": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__zebra__urlaubsunterkunft-ferienwohnungen-wuerzburg006.jpg"
+  }
+ ],
+ "thue-giraffe": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg001.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg002.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg003.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg004.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg005.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__giraffe__urlaubsunterkunft-ferienwohnungen-wuerzburg006.jpg"
+  }
+ ],
+ "thue-blauer-reiter": [
+  {
+   "file": "01.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_1.jpg"
+  },
+  {
+   "file": "02.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_2.jpg"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_3.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_4.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_5.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_6.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_7.jpg"
+  },
+  {
+   "file": "08.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_8.jpg"
+  },
+  {
+   "file": "09.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_9.jpg"
+  },
+  {
+   "file": "10.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_10.jpg"
+  },
+  {
+   "file": "11.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_11.jpg"
+  },
+  {
+   "file": "12.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_12.jpg"
+  },
+  {
+   "file": "13.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_13.jpg"
+  },
+  {
+   "file": "14.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_14.jpg"
+  },
+  {
+   "file": "15.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_15.jpg"
+  },
+  {
+   "file": "16.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_16.jpg"
+  },
+  {
+   "file": "17.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_17.jpg"
+  },
+  {
+   "file": "18.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_18.jpg"
+  },
+  {
+   "file": "19.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_19.jpg"
+  },
+  {
+   "file": "20.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__urlaubsunterkunft-thuengen_20.jpg"
+  },
+  {
+   "file": "21.jpg",
+   "w": 600,
+   "h": 900,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_1.png"
+  },
+  {
+   "file": "22.jpg",
+   "w": 600,
+   "h": 900,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_2.png"
+  },
+  {
+   "file": "23.jpg",
+   "w": 600,
+   "h": 900,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_3.png"
+  },
+  {
+   "file": "24.jpg",
+   "w": 600,
+   "h": 900,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_4.png"
+  },
+  {
+   "file": "25.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_6.png"
+  },
+  {
+   "file": "26.jpg",
+   "w": 600,
+   "h": 900,
+   "source": "ferienwohnung-blauer-reiter__ferienwohnung-thuengen_7.png"
+  }
+ ],
+ "thue-haus": [
+  {
+   "file": "01.jpg",
+   "w": 709,
+   "h": 464,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__fewo-urlaub007.JPG"
+  },
+  {
+   "file": "02.jpg",
+   "w": 894,
+   "h": 563,
+   "source": "ferienwohnungen__ferienwohnungen-thuengen__ferienwohnung-schlossberg__fewo-urlaub008.JPG"
+  },
+  {
+   "file": "03.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "thuengen.jpg"
+  },
+  {
+   "file": "04.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "panoramablick-ueber-thuengen.jpg"
+  },
+  {
+   "file": "05.jpg",
+   "w": 900,
+   "h": 600,
+   "source": "fewo-urlaub-kaempf.jpg"
+  },
+  {
+   "file": "06.jpg",
+   "w": 872,
+   "h": 581,
+   "source": "ferienwohnung-mit-hund__urlaub-mit-hund-fewo001.jpg"
+  },
+  {
+   "file": "07.jpg",
+   "w": 675,
+   "h": 900,
+   "source": "ferienwohnung-mit-hund__urlaub-mit-hund-fewo002.jpg"
+  },
+  {
+   "file": "08.jpg",
+   "w": 480,
+   "h": 640,
+   "source": "ferienwohnung-mit-hund__urlaub-mit-hund-fewo003.jpg"
+  },
+  {
+   "file": "09.jpg",
+   "w": 800,
+   "h": 600,
+   "source": "urlaub-fraenkisches-weinland__fewo-urlaub001.jpg"
+  },
+  {
+   "file": "10.jpg",
+   "w": 450,
+   "h": 600,
+   "source": "urlaub-fraenkisches-weinland__fewo-urlaub002.jpg"
+  },
+  {
+   "file": "11.jpg",
+   "w": 800,
+   "h": 600,
+   "source": "urlaub-fraenkisches-weinland__fewo-urlaub003.jpg"
+  },
+  {
+   "file": "12.jpg",
+   "w": 800,
+   "h": 600,
+   "source": "urlaub-fraenkisches-weinland__fewo-urlaub005.jpg"
+  }
+ ]
+}

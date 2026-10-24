@@ -630,3 +630,100 @@ body.has-mobile-bar .toast { bottom: 100px; }
   .detail-meta > * + *::before { display: none; }
 }
 @media (max-width: 400px) { .hide-sm { display: none; } }
+
+/* ==========================================================================
+   Relaunch-Ausbau: Übersichten, Inhaltsseiten, Karten, Vergleich
+   ========================================================================== */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.section--tight { padding-top: clamp(24px, 3vw, 40px); }
+.h3 { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; margin-bottom: 12px; }
+
+/* Seitenkopf (Übersichten & Inhaltsseiten) */
+.page-top { padding-top: 16px; padding-bottom: 12px; }
+.hero--page .hero-frame { min-height: min(64vh, 580px); }
+.hero--page .hero-content { padding-bottom: clamp(36px, 5vw, 64px); }
+.hero--page h1 { font-size: clamp(2.2rem, 5.4vw, 4rem); }
+@media (max-width: 640px) { .hero--page .hero-frame { min-height: min(74svh, 600px); } .hero--page .hero-content { padding-bottom: 32px; } }
+.page-head { display: grid; gap: 14px; padding-top: 20px; padding-bottom: clamp(24px, 4vw, 48px); }
+.page-head h1 { font-size: clamp(2rem, 4.6vw, 3.4rem); max-width: 22ch; letter-spacing: -0.04em; line-height: 1.05; }
+.page-head .crumbs { margin-bottom: 8px; }
+.detail-title .kicker { margin-bottom: 6px; }
+
+/* Galerie mit nur einem Foto */
+.gallery-grid--one { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.gallery-grid--one button:first-child { grid-row: auto; }
+.room-ph { aspect-ratio: 4 / 3; display: grid; place-items: center; color: var(--muted); background: var(--sunken); }
+
+/* Karten */
+.map-note { margin-top: 12px; font-size: 0.8rem; color: var(--muted); }
+.map-card a circle { transition: fill 0.2s; }
+.map-card a:hover circle, .map-card a:focus-visible circle { fill: var(--oak); }
+.map-split { display: grid; gap: 24px; }
+@media (min-width: 1000px) { .map-split { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; } }
+.map-legend { display: grid; gap: 2px; }
+.map-legend a { display: flex; align-items: center; gap: 14px; padding: 10px 12px; border-radius: var(--r-md); transition: background 0.2s; }
+.map-legend a:hover { background: var(--sunken); }
+.map-legend .num { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 700; }
+.map-legend strong { display: block; font-weight: 650; line-height: 1.3; }
+.map-legend small { display: block; font-size: 0.85rem; color: var(--muted); }
+
+/* Vergleichstabelle */
+.table-wrap { overflow-x: auto; border-radius: var(--r-lg); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.compare { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 0.95rem; }
+.compare th, .compare td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+.compare thead th { font-size: 0.72rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.compare tbody th { font-weight: 650; white-space: nowrap; }
+.compare td { color: var(--ink-2); }
+.compare tbody tr:last-child > * { border-bottom: 0; }
+.compare tbody tr { transition: background 0.2s; }
+.compare tbody tr:hover { background: var(--sunken); }
+
+/* Kacheln */
+.tiles { display: grid; gap: 36px 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.tiles-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+.tiles-2 .tile .media, .tile--wide .media { aspect-ratio: 3 / 2; }
+.tile .near { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.88rem; color: var(--ink-2); }
+a.tile:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hunde-Galerie */
+.dog-grid { display: grid; gap: 12px; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; height: clamp(380px, 46vw, 580px); }
+.dog-grid .media { border-radius: var(--r-lg); }
+.dog-grid .media:first-child { grid-row: 1 / 3; }
+@media (max-width: 640px) {
+  .dog-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; height: auto; }
+  .dog-grid .media { aspect-ratio: 1; }
+  .dog-grid .media:first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+}
+
+/* Abschluss-Band */
+.cta-band { display: grid; gap: 28px; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-xl); background: var(--accent-tint); }
+.cta-band > div:first-child { display: grid; gap: 12px; }
+@media (min-width: 960px) { .cta-band { grid-template-columns: 1.3fr auto; align-items: end; } }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Kongress */
+.feature-grid { display: grid; gap: 28px; }
+@media (min-width: 760px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .feature-grid { grid-template-columns: repeat(4, 1fr); } }
+.rank-list { border-top: 1px solid var(--line); }
+.rank-list a { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 16px; padding: 16px 8px; border-bottom: 1px solid var(--line); transition: background 0.2s; }
+.rank-list a:hover { background: var(--sunken); }
+.rank-list strong { display: block; font-weight: 650; }
+.rank-list small { display: block; font-size: 0.88rem; color: var(--muted); }
+.rank-list a > span:last-child { color: var(--ink-2); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+
+/* Anreise & Kontakt */
+.two-col { display: grid; gap: 48px; }
+@media (min-width: 960px) { .two-col { grid-template-columns: 1fr 1fr; gap: 72px; } }
+.distances--one { grid-template-columns: 1fr !important; }
+
+/* Rechtstexte */
+.prose { max-width: 70ch; padding-bottom: var(--section); color: var(--ink-2); }
+.prose h2 { font-size: 1.25rem; margin: 32px 0 10px; color: var(--ink); }
+.prose ul { list-style: disc; padding-left: 1.2em; }
+.prose li + li { margin-top: 6px; }
+.prose .note { margin: 20px 0; padding: 16px 18px; border-radius: var(--r-md); background: #fff6df; box-shadow: inset 0 0 0 1px #eedca8; font-size: 0.92rem; }
+.prose mark { padding: 0 4px; border-radius: 4px; background: #fff6df; }
+.footer-grid h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.map-legend, .rank-list { list-style: none; margin: 0; padding: 0; }
+.sec-head .kicker { display: inline-flex; align-items: center; gap: 6px; }

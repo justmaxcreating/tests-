@@ -370,7 +370,7 @@
       e.preventDefault();
       closeAll();
       const sel = $("#anfrage-form select[name=wohnung]");
-      if (sel && state.place) sel.value = state.place === "wuerzburg" ? "Würzburg – Das Herzstück der Altstadt" : "Thüngen – egal welche";
+      if (sel && state.place) sel.value = state.place === "wuerzburg" ? "Würzburg – egal welche" : "Thüngen – egal welche";
       const target = document.getElementById("anfrage");
       target && target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
       setTimeout(() => { const n = $("#anfrage-form [name=name]"); n && n.focus({ preventScroll: true }); }, 700);
@@ -496,10 +496,10 @@
     fetch(credits.dataset.credits).then((r) => (r.ok ? r.json() : Promise.reject())).then((data) => {
       const seen = new Set();
       const items = Object.values(data).filter((c) => !seen.has(c.url) && seen.add(c.url));
-      $("ul", credits).innerHTML = items.map((c) => c.source === "Unsplash"
-        ? `<li>Beispielfoto Innenraum · <a href="${c.url}" rel="noopener" target="_blank">Unsplash</a></li>`
-        : `<li>${c.title.replace(/\.(jpe?g|png)$/i, "")} · ${c.author || "unbekannt"} · ${c.license || ""} · <a href="${c.url}" rel="noopener" target="_blank">Wikimedia Commons</a></li>`).join("");
-    }).catch(() => (credits.hidden = true));
+      $("ul", credits).insertAdjacentHTML("beforeend", items.map((c) => c.source === "Unsplash"
+        ? `<li>Foto · <a href="${c.url}" rel="noopener" target="_blank">Unsplash</a></li>`
+        : `<li>${c.title.replace(/\.(jpe?g|png)$/i, "")} · ${c.author || "unbekannt"} · ${c.license || ""} · <a href="${c.url}" rel="noopener" target="_blank">Wikimedia Commons</a></li>`).join(""));
+    }).catch(() => {});
   }
 
   /* ---------- Jahr ---------- */

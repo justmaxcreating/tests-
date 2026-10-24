@@ -1,18 +1,69 @@
-# 301-Weiterleitungen von der alten fewo-urlaub.com-Struktur (Netlify-Format).
+# 301-Weiterleitungen von der alten fewo-urlaub.com-Struktur (Netlify-Format). Erzeugt von tools/gen/build.py.
 # Erhält Rankings & Backlinks. Vor Go-live mit dem Search-Console-Export der alten URLs abgleichen.
 
-/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-altstadt-wuerzburg   /wuerzburg/altstadt/   301
-/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-altstadt   /wuerzburg/altstadt/   301
-/staedtereise-wuerzburg        /wuerzburg/altstadt/   301
-/staedtereise-wuerzburg.html   /wuerzburg/altstadt/   301
-
-# Thüngen hat noch keine eigenen Detailseiten → vorerst Startseite
-/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen     /   301
-/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/*   /   301
-/ferien-fraenkisches-weinland                                     /   301
-/ferienwohnungen-fraenkisches-weinland/unterkunftsanfrage.html    /   301
-/kontakt-ferienwohnungen                                          /   301
-/kontakt-ferienwohnungen/eichenholz-produke-thuengen              /   301
-
-# Prüfen: ist diese Wohnung noch aktiv? Dann eigene Seite statt Startseite.
-/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-kulturspeicher   /   301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg                                                  /wuerzburg/                              301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg.html                                             /wuerzburg/                              301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/                                                 /wuerzburg/                              301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-altstadt-wuerzburg                 /wuerzburg/herzstueck-der-altstadt/      301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-altstadt-wuerzburg.html            /wuerzburg/herzstueck-der-altstadt/      301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-altstadt-wuerzburg/                /wuerzburg/herzstueck-der-altstadt/      301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-altstadt                 /wuerzburg/im-herzen-der-altstadt/       301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-altstadt.html            /wuerzburg/im-herzen-der-altstadt/       301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-altstadt/                /wuerzburg/im-herzen-der-altstadt/       301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/baerengasse-ferienwohnung                        /wuerzburg/juliuspromenade-1/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/baerengasse-ferienwohnung.html                   /wuerzburg/juliuspromenade-1/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/baerengasse-ferienwohnung/                       /wuerzburg/juliuspromenade-1/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-juliuspromenade                    /wuerzburg/juliuspromenade-2/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-juliuspromenade.html               /wuerzburg/juliuspromenade-2/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-juliuspromenade/                   /wuerzburg/juliuspromenade-2/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-kulturspeicher                     /wuerzburg/am-kulturspeicher/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-kulturspeicher.html                /wuerzburg/am-kulturspeicher/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-kulturspeicher/                    /wuerzburg/am-kulturspeicher/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-sanderglacisstrasse-ringpark       /wuerzburg/am-ringpark/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-sanderglacisstrasse-ringpark.html  /wuerzburg/am-ringpark/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-sanderglacisstrasse-ringpark/      /wuerzburg/am-ringpark/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-semmelstrasse                      /wuerzburg/am-baeckerbrunnen/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-semmelstrasse.html                 /wuerzburg/am-baeckerbrunnen/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-semmelstrasse/                     /wuerzburg/am-baeckerbrunnen/            301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-annastrasse              /wuerzburg/annastrasse/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-annastrasse.html         /wuerzburg/annastrasse/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnungen-wuerzburg/ferienwohnung-wuerzburg-annastrasse/             /wuerzburg/annastrasse/                  301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/ferienwohnung-thuengen-unterfranken                 /thuengen/blauer-reiter/                 301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/ferienwohnung-thuengen-unterfranken.html            /thuengen/blauer-reiter/                 301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/ferienwohnung-thuengen-unterfranken/                /thuengen/blauer-reiter/                 301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen                                                     /thuengen/                               301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen.html                                                /thuengen/                               301
+/ferienwohnungen-fraenkisches-weinland/ferienwohnung-thuengen/                                                    /thuengen/                               301
+/ferienwohnungen-fraenkisches-weinland/unterkunftsanfrage                                                         /anreise-kontakt/                        301
+/ferienwohnungen-fraenkisches-weinland/unterkunftsanfrage.html                                                    /anreise-kontakt/                        301
+/ferienwohnungen-fraenkisches-weinland/unterkunftsanfrage/                                                        /anreise-kontakt/                        301
+/ferien-fraenkisches-weinland                                                                                     /thuengen/                               301
+/ferien-fraenkisches-weinland.html                                                                                /thuengen/                               301
+/ferien-fraenkisches-weinland/                                                                                    /thuengen/                               301
+/staedtereise-wuerzburg/ausfluege-empfehlungen-stadturlaub                                                        /ausfluege/                              301
+/staedtereise-wuerzburg/ausfluege-empfehlungen-stadturlaub.html                                                   /ausfluege/                              301
+/staedtereise-wuerzburg/ausfluege-empfehlungen-stadturlaub/                                                       /ausfluege/                              301
+/staedtereise-wuerzburg                                                                                           /wuerzburg/                              301
+/staedtereise-wuerzburg.html                                                                                      /wuerzburg/                              301
+/staedtereise-wuerzburg/                                                                                          /wuerzburg/                              301
+/universitaet-kongress                                                                                            /kongress-geschaeftsreise/               301
+/universitaet-kongress.html                                                                                       /kongress-geschaeftsreise/               301
+/universitaet-kongress/                                                                                           /kongress-geschaeftsreise/               301
+/kontakt-ferienwohnungen/anreise-thuengen                                                                         /anreise-kontakt/                        301
+/kontakt-ferienwohnungen/anreise-thuengen.html                                                                    /anreise-kontakt/                        301
+/kontakt-ferienwohnungen/anreise-thuengen/                                                                        /anreise-kontakt/                        301
+/kontakt-ferienwohnungen/eichenholz-produke-thuengen                                                              /#eiche                                  301
+/kontakt-ferienwohnungen/eichenholz-produke-thuengen.html                                                         /#eiche                                  301
+/kontakt-ferienwohnungen/eichenholz-produke-thuengen/                                                             /#eiche                                  301
+/kontakt-ferienwohnungen/impressum-kaempf                                                                         /impressum/                              301
+/kontakt-ferienwohnungen/impressum-kaempf.html                                                                    /impressum/                              301
+/kontakt-ferienwohnungen/impressum-kaempf/                                                                        /impressum/                              301
+/kontakt-ferienwohnungen                                                                                          /anreise-kontakt/                        301
+/kontakt-ferienwohnungen.html                                                                                     /anreise-kontakt/                        301
+/kontakt-ferienwohnungen/                                                                                         /anreise-kontakt/                        301
+/ferienwohnungen-fraenkisches-weinland                                                                            /                                        301
+/ferienwohnungen-fraenkisches-weinland.html                                                                       /                                        301
+/ferienwohnungen-fraenkisches-weinland/                                                                           /                                        301
+/wuerzburg/altstadt                                                                                               /wuerzburg/herzstueck-der-altstadt/      301
+/wuerzburg/altstadt.html                                                                                          /wuerzburg/herzstueck-der-altstadt/      301
+/wuerzburg/altstadt/                                                                                              /wuerzburg/herzstueck-der-altstadt/      301

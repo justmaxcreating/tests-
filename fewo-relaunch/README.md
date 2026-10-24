@@ -1,9 +1,9 @@
 # Relaunch fewo-urlaub.com – Ferienwohnungen Würzburg & Thüngen
 
 Designvorschlag für die Ferienwohnungs-Website von Carolin & Stefan Voll (Familie hinter dem Sägewerk Hugo Kämpf, Thüngen).
-Umfang: **Startseite** + **Detailseite der Würzburger Altstadtwohnung** („Das Herzstück der Altstadt“, Franziskanergasse 1A).
+Umfang: **komplette Website** – Startseite, zwei Übersichtsseiten (Würzburg, Thüngen), **12 Wohnungsseiten**, Ausflüge, Kongress & Geschäftsreise, Anreise & Kontakt, Impressum, Datenschutz, 404.
 
-Reines HTML/CSS/JS – kein Framework, keine externen Requests im Browser. Einziger Build-Schritt: ein kleines Netlify-Plugin lädt freie Fotos und hostet sie selbst (siehe *Fotos*).
+Reines HTML/CSS/JS – kein Framework, keine externen Requests im Browser. Die Seiten werden mit einem kleinen Python-Generator aus den Inhalten erzeugt.
 
 ## Ansehen
 
@@ -13,24 +13,25 @@ Lokal:
 
 ```bash
 cd fewo-relaunch
-python3 -m http.server 8000
-# → http://localhost:8000
-```
-
-Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, verschickt nichts). Fotos gibt es lokal nur, wenn `assets/photos/` befüllt ist – sonst erscheinen Farbflächen als Platzhalter.
-
-## Am Laptop weiterarbeiten
-
-```bash
-git clone https://github.com/justmaxcreating/tests-.git
-cd tests-
-git checkout fewo-relaunch
-cd fewo-relaunch
-node tools/fetch-photos-local.js   # Fotos laden (einmalig, braucht Internet)
+node tools/fetch-photos-local.js   # Ortsfotos laden (einmalig, braucht Internet)
 python3 -m http.server 8000         # → http://localhost:8000
 ```
 
-**Inhalte ändern:** Texte, Wohnungen, FAQ und Bewertungen stehen in `tools/gen/home.py` und `tools/gen/detail.py`, gemeinsame Bausteine (Header, Footer, Icons, Bilder, Kalender) in `tools/gen/parts.py`. Danach `python3 tools/gen/build.py` – das erzeugt beide HTML-Seiten neu. Bitte nicht direkt im HTML ändern, sonst überschreibt der nächste Build die Änderung.
+Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, verschickt nichts).
+
+## Inhalte ändern
+
+| Was | Wo |
+|---|---|
+| Wohnungen (Texte, Eckdaten, Fotos, Alt-Texte) | `tools/gen/data.py` |
+| Startseite | `tools/gen/home.py` |
+| Übersichten Würzburg / Thüngen inkl. FAQ | `tools/gen/hub.py` |
+| Ausflüge, Kongress, Kontakt, Impressum, Datenschutz, 404 | `tools/gen/pages.py` |
+| Detailseiten-Vorlage | `tools/gen/detail.py` |
+| Header, Footer, Icons, Bilder, SEO-Kopf | `tools/gen/parts.py` |
+| Lagekarten | `tools/gen/maps.py` (+ Geodaten in `geo_data.py`) |
+
+Danach `python3 tools/gen/build.py` – das erzeugt **alle Seiten, `sitemap.xml` und `_redirects`** neu. Bitte nicht direkt im HTML ändern, sonst überschreibt der nächste Build die Änderung.
 Styles: `css/styles.css`, Interaktionen: `js/main.js` (beide direkt bearbeiten).
 
 **Veröffentlichen:** Jeder Push auf den Branch `fewo-relaunch` landet automatisch auf https://fewo-relaunch-vorschau.netlify.app/.
@@ -39,94 +40,107 @@ Styles: `css/styles.css`, Interaktionen: `js/main.js` (beide direkt bearbeiten).
 
 ```
 fewo-relaunch/
-├── index.html                    Startseite
-├── wuerzburg/altstadt/index.html Detailseite Würzburg (neue, sprechende URL)
-├── css/styles.css                Design-System (Tokens oben in :root)
-├── js/main.js                    Interaktionen
-├── assets/fonts/                 Plus Jakarta Sans, selbst gehostet (SIL OFL)
-├── assets/photos/                wird beim Netlify-Build befüllt (nicht im Repo)
-├── assets/favicon.svg
-├── plugins/fetch-photos/         Netlify-Build-Plugin: lädt Fotos + Bildnachweise
-├── tools/gen/                    Seiten-Generator (Inhalte → HTML)
-├── tools/fetch-photos-local.js   Fotos lokal laden
-├── robots.txt, sitemap.xml
-├── _redirects                    301-Weiterleitungen alte → neue URLs (Netlify)
-└── preview/                      Screenshots für die Präsentation
+├── index.html                       Startseite (alle 12 Wohnungen, Filter, Anfrage)
+├── wuerzburg/index.html             Übersicht Würzburg: Karte, Vergleich, FAQ
+├── wuerzburg/<wohnung>/index.html   8 Detailseiten
+├── thuengen/index.html              Übersicht Thüngen: Hund, Garten, Weinland, Karte, FAQ
+├── thuengen/<wohnung>/index.html    4 Detailseiten
+├── ausfluege/                       Sehenswürdigkeiten + nächstgelegene Wohnung
+├── kongress-geschaeftsreise/        Landingpage für Geschäftsreisende
+├── anreise-kontakt/                 Anreise per Bahn/Auto + Anfrageformular
+├── impressum/, datenschutz/         Entwürfe (noindex)
+├── 404.html
+├── css/styles.css, js/main.js
+├── assets/fewo/<wohnung>/NN.jpg     echte Fotos der Gastgeber (im Repo)
+├── assets/photos/                   Ortsfotos, beim Netlify-Build geladen (nicht im Repo)
+├── plugins/fetch-photos/            Netlify-Build-Plugin für die Ortsfotos + Bildnachweise
+├── tools/gen/                       Seiten-Generator
+├── robots.txt, sitemap.xml, _redirects, _headers
+└── preview/                         Screenshots des ersten Entwurfs
 ```
+
+### URLs
+
+| Seite | URL | Zielsuchbegriff |
+|---|---|---|
+| Startseite | `/` | Ferienwohnungen Würzburg Thüngen |
+| Würzburg | `/wuerzburg/` | Ferienwohnung Würzburg (Altstadt, Zentrum) |
+| Herzstück der Altstadt | `/wuerzburg/herzstueck-der-altstadt/` | Ferienwohnung Würzburg Altstadt |
+| Im Herzen der Altstadt | `/wuerzburg/im-herzen-der-altstadt/` | Ferienwohnung Würzburg Marktplatz |
+| Juliuspromenade I / II | `/wuerzburg/juliuspromenade-1/`, `-2/` | Ferienwohnung Würzburg Zentrum |
+| Am Kulturspeicher | `/wuerzburg/am-kulturspeicher/` | Ferienwohnung Würzburg mit Parkplatz |
+| Am Ringpark | `/wuerzburg/am-ringpark/` | Ferienwohnung Würzburg Ringpark |
+| Am Bäckerbrunnen | `/wuerzburg/am-baeckerbrunnen/` | Ferienwohnung Würzburg Innenstadt |
+| Annastraße | `/wuerzburg/annastrasse/` | Ferienwohnung Würzburg 8 Personen |
+| Thüngen | `/thuengen/` | Ferienwohnung Thüngen, mit Hund, Fränkisches Weinland |
+| Elefant, Zebra, Giraffe, Blauer Reiter | `/thuengen/<name>/` | Ferienwohnung Thüngen mit Hund |
+| Ausflüge | `/ausfluege/` | Würzburg Sehenswürdigkeiten, Ausflüge Weinland |
+| Kongress | `/kongress-geschaeftsreise/` | Unterkunft Würzburg Kongress |
 
 ## Design
 
 Aufbau-Prinzipien von großen Buchungsplattformen übernommen, Optik eigenständig:
 
-- **Fotos führen:** großer Foto-Hero, Wohnungskarten mit Bilder-Slider (wischen auf dem Handy, Pfeile am Desktop), Bento-Galerie mit Lightbox auf der Detailseite.
-- **Scanbar:** Eckdaten in einer Zeile (m², Gäste, Schlafzimmer), Bewertung direkt am Titel, klare Abschnitte mit Trennlinien.
-- **Buchungsfluss:** Suchleiste mit echtem Zeitraum-Kalender (zwei Monate, Bereichs-Vorschau beim Hovern) und Gäste-Auswahl (Erwachsene/Kinder/Kleinkinder, Maximum je Wohnung). Die Auswahl wird von der Startseite auf die Detailseite mitgenommen. Die Buchungskarte bleibt beim Scrollen sichtbar, mobil gibt es eine Leiste am unteren Rand und ein Bottom-Sheet.
-- **Filter:** Würzburg, Thüngen, Mit Hund, Für Familien, Bis 6 Personen. Gemerkte Wohnungen (Herz) werden im Browser gespeichert.
-- **Typo:** eine Schrift (Plus Jakarta Sans), große, eng gesetzte Headlines.
-- **Farben:** warmes Off-White `#fbfaf8`, Tinte `#16140f`, Akzent Bocksbeutel-Grün `#1f3b2d`, Eiche `#9a6a3a` nur sparsam.
-- **Details:** weiche, mehrlagige Schatten, 1-px-Konturen statt harter Rahmen, Bilder blenden beim Laden ein, Herz-„Pop“, Stepper-Bump, gezeichneter Haken bei der Erfolgsmeldung.
+- **Fotos führen:** großer Foto-Hero, Wohnungskarten mit Bilder-Slider, Bento-Galerie mit Lightbox auf jeder Detailseite.
+- **Scanbar:** Eckdaten in einer Zeile, Vergleichstabelle auf der Würzburg-Übersicht, Gehzeiten zu den wichtigsten Zielen.
+- **Buchungsfluss:** Suchleiste mit Zeitraum-Kalender und Gäste-Auswahl (Maximum je Wohnung). Die Auswahl wird mitgenommen. Buchungskarte bleibt beim Scrollen sichtbar, mobil Leiste unten und Bottom-Sheet.
+- **Filter:** Würzburg, Thüngen, Mit Hund, Ab 6 Gästen, Mit Parkplatz. Gemerkte Wohnungen (Herz) werden im Browser gespeichert.
+- **Lagekarten** als eigene SVG-Grafik aus echten Koordinaten (OpenStreetMap-Daten): kein Google Maps, keine Cookies, keine externen Requests. Auf der Würzburg-Übersicht alle 8 Wohnungen nummeriert, auf den Detailseiten die Wohnung + Nachbarn als Links.
+- **Gehzeiten** werden aus den Koordinaten berechnet (Luftlinie × 1,3, 80 m/min) – ehrlich statt „nur wenige Schritte“.
+- Typo: Plus Jakarta Sans (selbst gehostet). Farben: Off-White `#fbfaf8`, Tinte `#16140f`, Bocksbeutel-Grün `#1f3b2d`, Eiche `#9a6a3a`.
 - `prefers-reduced-motion` wird respektiert, alles ist per Tastatur bedienbar.
 
 ### Komponenten von 21st.dev
 
-Zwei Bausteine sind nach Vorlagen von [21st.dev](https://21st.dev) gebaut und in reines HTML/CSS/JS übertragen (die Originale sind React):
-
-- **Bewertungen** nach „Testimonials Section with Logo Marquee“ (@kedhareswer): Snap-Slider mit Pfeilen und Punkten, Tastatursteuerung, Laufband. Inhalte sind nur belegbare Noten; echte Gästezitate können später eingesetzt werden.
-- **Foto-Slider der Karten** nach „Image Swiper“ (@lukacho): mit der Maus ziehbar (ab 10 px wird geblättert), Zähler beim Hovern, Klick aufs Foto öffnet die Wohnung.
+- **Bewertungen** nach „Testimonials Section with Logo Marquee“ (@kedhareswer).
+- **Foto-Slider der Karten** nach „Image Swiper“ (@lukacho).
 
 ## Fotos
 
-`plugins/fetch-photos` lädt beim Netlify-Build Fotos und legt sie unter `assets/photos/<slot>-960.jpg` / `-1920.jpg` ab:
+- **Wohnungen:** echte Fotos der Gastgeber, übernommen von fewo-urlaub.com, optimiert unter `assets/fewo/<wohnung>/NN.jpg`. Jedes Foto hat einen beschreibenden Alt-Text (`data.py`). Doppelte Fotos wurden aussortiert.
+- **Orte & Ausflüge:** Wikimedia Commons (CC-Lizenzen), geladen vom Plugin `plugins/fetch-photos`. Urheber und Lizenz landen automatisch in `credits.json` und erscheinen im Footer unter „Bildnachweise“.
+- **Neue Fotos einsetzen:** Datei unter `assets/fewo/<wohnung>/` ablegen (mind. 1600 px breit, JPG), in `data.py` bei der Wohnung in `photos` eintragen, Build starten. Die Maße liest der Generator aus `assets/fewo/manifest.json` – nach neuen Fotos das Manifest aktualisieren (Breite/Höhe je Datei).
 
-- **Würzburg, Weinberge, Schloss Thüngen, Eichenholz:** echte Motive von Wikimedia Commons (CC-Lizenzen). Urheber und Lizenz werden automatisch in `credits.json` geschrieben und im Footer unter „Bildnachweise“ angezeigt.
-- **Innenräume:** **Beispielbilder von Unsplash** – nicht die echten Wohnungen. Darauf weist der Hinweisbalken oben auf der Seite hin.
+## SEO-Maßnahmen (umgesetzt)
 
-**Echte Fotos einsetzen:** Datei unter dem Slot-Namen nach `assets/photos/` legen (beide Größen) und mit `git add -f` committen (der Ordner ist sonst ignoriert, damit lokal geladene Beispielbilder nicht im Repo landen) – das Plugin überschreibt vorhandene Dateien nicht. Die Fotos der Gastgeber liegen u. a. auf Booking.com und FeWo-direkt. Danach den Hinweisbalken (`.preview-bar`) entfernen.
-
-## SEO-Maßnahmen
-
-- Eigener `<title>` und eine eigene Meta-Description pro Seite, jeweils auf das Haupt-Keyword ausgerichtet („Ferienwohnung Würzburg Altstadt“, „Ferienwohnungen Würzburg Thüngen“).
-- Saubere, sprechende URL `/wuerzburg/altstadt/`. Die alten URLs (doppelte `.html`-Varianten, Tippfehler `produke`) werden per **301** weitergeleitet, siehe `_redirects`.
-- Strukturierte Daten (JSON-LD):
-  - `LodgingBusiness` und `WebSite` auf der Startseite
-  - `VacationRental` mit Fläche, Belegung, Betten und Ausstattung auf der Detailseite
-  - `BreadcrumbList`
-  - `FAQPage` auf beiden Seiten
-- **Bewusst ohne `aggregateRating`:** Google wertet selbst eingebundene Fremdbewertungen auf der eigenen Seite als „self-serving“. Sie würden kein Rich Result bringen und können eine manuelle Maßnahme auslösen.
-- Canonical, Open Graph, `robots.txt`, `sitemap.xml`.
-- Semantisches HTML: eine H1 pro Seite, Landmarks, Alt-Texte, `lang="de"`.
-- **Performance:** keine Frameworks, Schriften vorgeladen und selbst gehostet. Das ist auch DSGVO-relevant: Google Fonts von Google-Servern zu laden, hat in Deutschland schon zu Abmahnungen geführt.
-- **Datenschutz:** keine eingebettete Google-Map. Stattdessen gibt es eine schematische SVG-Karte mit einem Routen-Link.
+- **Eine Seite pro Wohnung** mit eigener, sprechender URL, eigenem `<title>` (≤ 60 Zeichen) und eigener Meta-Description (≤ 158 Zeichen), jeweils auf einen Suchbegriff ausgerichtet (siehe Tabelle oben).
+- **Übersichtsseiten** für „Ferienwohnung Würzburg“ und „Ferienwohnung Thüngen (mit Hund)“ mit eigenem Text, Karte, Vergleich und FAQ.
+- **Interne Verlinkung:** Brotkrumen, „Weitere Wohnungen in der Nähe“ auf jeder Detailseite, Kartenpins als Links, Ausflugstipps verlinken die nächstgelegene Wohnung, Footer mit allen 12 Wohnungen.
+- **301-Weiterleitungen** aller alten URLs (mit und ohne `.html`, mit und ohne `/`) auf die passende neue Seite – erzeugt in `_redirects`. Erhält Rankings und Backlinks.
+- **Strukturierte Daten (JSON-LD):** `VacationRental` je Wohnung (Fläche, Belegung, Betten, Ausstattung, Geo-Koordinaten, Fotos), `LodgingBusiness`, `WebSite`, `ItemList`, `CollectionPage`, `BreadcrumbList`, `FAQPage`.
+  - Hinweis: FAQ-Ergebnisse zeigt Google seit 2023 nur noch für wenige Websites an, und Ferienunterkünfte erscheinen in Google über Partner-Feeds (z. B. Booking, FeWo-direkt). Die Daten helfen Google trotzdem, die Seiten zu verstehen.
+  - **Bewusst ohne `aggregateRating`:** Selbst eingebundene Fremdbewertungen wertet Google als „self-serving“.
+- **Semantisches HTML:** eine H1 pro Seite, Landmarks, Alt-Texte für alle Fotos, `lang="de"`.
+- **Performance:** keine Frameworks, Schriften selbst gehostet, Bilder mit `width`/`height` (kein Layout-Springen) und Lazy Loading.
+- **Datenschutz:** keine Google Fonts, keine eingebettete Karte, keine Cookies.
+- `sitemap.xml` (18 Seiten) und `robots.txt` werden mitgebaut.
 
 ## Vor dem Go-live erledigen
 
-### Fotos
-Innenraum-Beispielbilder durch echte Fotos der Wohnungen ersetzen (siehe *Fotos*), Hinweisbalken entfernen.
+1. **Indexierung freischalten:** in `tools/gen/parts.py` `INDEXABLE = True`, Build starten, `_headers` löschen.
+2. **Weiterleitungen prüfen:** in der Google Search Console unter *Leistung → Seiten* alle alten URLs exportieren und mit `_redirects` abgleichen.
+3. **Anfrageformular:** vorbereitet für **Netlify Forms** (`anfrage` auf Startseite/Kontakt, `anfrage-wohnung` auf den Detailseiten). Bei einem anderen Hoster die `fetch`-URL in `js/main.js` anpassen.
+4. **Rechtliches:** Impressum ist ein Entwurf (E-Mail fehlt), die Datenschutzerklärung ein Platzhalter mit Stichpunkten.
+5. **Markenname:** „Voll – Ferienwohnungen in Franken“ ist ein **Vorschlag**. Auf den Portalen läuft Thüngen als „Wohnen am Schlossberg“, die Domain heißt fewo-urlaub.com. Name, Adresse und Telefon sollten überall identisch sein.
+6. **Hinweisbalken** „Designentwurf“ in `tools/gen/parts.py` (`header()`) entfernen.
 
-### Anfrageformular
-Es ist für **Netlify Forms** vorbereitet (`data-netlify="true"`, Honeypot) und funktioniert dort ohne Backend.
-Bei einem anderen Hoster muss die `fetch`-URL in `js/main.js` angepasst werden.
+## Inhalte zum Gegenprüfen
 
-### Rechtliches
-`/impressum/` und `/datenschutz/` sind verlinkt, existieren aber noch nicht.
+Alle Fakten stammen von fewo-urlaub.com (Stand Okt. 2026), die Texte sind neu geschrieben. Folgendes ist unklar oder widersprüchlich:
 
-### Markenname
-„Voll – Ferienwohnungen Franken“ ist ein **Vorschlag**. Auf den Portalen läuft Thüngen als „Wohnen am Schlossberg“, die Domain heißt fewo-urlaub.com. Der Name sollte einheitlich sein, weil das für die Google-Suche nach dem Markennamen wichtig ist.
-
-### Inhalte zum Gegenprüfen
-Die Inhalte stammen aus Suchergebnissen zu fewo-urlaub.com, Booking.com und FeWo-direkt. Die Original-Seite war aus der Arbeitsumgebung nicht direkt erreichbar. Diese Punkte bitte mit den Gastgebern abgleichen:
-
-| Angabe | Quelle / Status |
+| Punkt | Stand / Annahme |
 |---|---|
-| Würzburg: 50 m², 2–4 Gäste, 2. OG ohne Aufzug, Babybett, keine Haustiere | fewo-urlaub.com |
-| Zweite Würzburg-Seite nennt Innerer Graben 12, 60 m² | widersprüchlich – andere Wohnung? |
-| Wohnung „Kulturspeicher“ Würzburg | unklar, ob noch aktiv |
-| Thüngen: Elefant/Zebra bis 6, Giraffe bis 4 Gäste | fewo-urlaub.com (FeWo-direkt nennt Zebra bis 4) |
-| Blauer Reiter: max. Gästezahl | unbekannt – vorerst ohne Angabe |
-| 9,1 (Booking.com) auf allen Thüngen-Karten | gilt für das ganze Haus „Wohnen am Schlossberg“, nicht je Wohnung |
-| Check-in 15 Uhr / Check-out 11 Uhr | Booking.com + fewo-urlaub.com |
-| 9,1/10 Booking.com (26 Bew.), 9,6/10 FeWo-direkt | Stand Okt. 2026, regelmäßig aktualisieren |
+| **Adresse Thüngen** | Kontakt: Gartenstraße 11 · Thüngen-Seite: „Gärtnerstraße 11“ (gibt es laut Karte nicht) · Impressum: Retzstadter Str. 1. Verwendet: **Gartenstraße 11** (Haus am Schlossberg), Impressum: Retzstadter Str. 1 |
+| **Blauer Reiter** | Genaue Adresse von „Haus Kämpf“ fehlt; max. Gäste unbekannt (vorerst 2, da nur Doppelbett genannt); Hunde, Parkplatz, TV, Babybett unbekannt → nicht erwähnt. Die 9,1 von Booking gilt für das Haus am Schlossberg, nicht für den Blauen Reiter. |
+| **Annastraße** | Nur **ein** Foto vorhanden; Größe (m²) fehlt; „bis 8 Personen“ bei 2 Doppelbetten – weitere Schlafplätze unklar (Seite sagt „Details auf Anfrage“) |
+| **Herzstück der Altstadt** | Fotos sehr klein (max. 640 px), kein Schlafzimmerfoto |
+| **Juliuspromenade I / II** | Text von I nennt „3. Bett in der Leseecke“, das Foto der Schlafnische liegt aber auf der Seite von II. Bitte zuordnen. |
+| **Am Kulturspeicher** | Original nennt 2–4 Gäste, an anderer Stelle „bestens geeignet für 2 Personen“ |
+| **Elefant / Zebra / Giraffe** | Welche Wohnung in welcher Etage? Bad laut Fotos mit Badewanne |
+| Thüngen: Elefant/Zebra bis 6, Giraffe bis 4 | fewo-urlaub.com (FeWo-direkt nennt Zebra bis 4) |
+| Bewertungen 9,1 Booking (26) · 9,6 FeWo-direkt · 8,6 Gîtes.fr | Stand Okt. 2026, regelmäßig aktualisieren |
 | „150+ Jahre“, FSC seit 2004 | hugokaempf.de (an anderer Stelle „über 145 Jahre“) |
-| Gehdistanzen (Dom ca. 300 m usw.) | geschätzt – mit Routenplaner prüfen |
-| Talavera kostenlos parken | fewo-urlaub.com |
-| „Spät ankommen? Wir finden eine Lösung“ | Formulierung mit Gastgebern abstimmen |
+| Gehzeiten | aus Koordinaten geschätzt (Luftlinie × 1,3) |
+| Check-in 15 Uhr / Check-out 11 Uhr | fewo-urlaub.com; Blauer Reiter: Check-in 15–19 Uhr |
+| Corona-Hinweis der alten Startseite | bewusst weggelassen (veraltet) |
+| Wohnung „Kulturspeicher“ | auf der alten Seite noch aktiv – übernommen |

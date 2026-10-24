@@ -1,60 +1,18 @@
-import json
+from cards import card
+from data import APARTMENTS
+from pages import host_card
 from parts import *
 
 P = ""
 
-LISTINGS = [
-    dict(id="wue-altstadt", href="wuerzburg/altstadt/", place="Würzburg · Altstadt", name="Das Herzstück der Altstadt",
-         facts="50 m² · 1 Schlafzimmer · 2–4 Gäste", rating="9,6", rating_title="FeWo-direkt", badge="Im Riemenschneider-Haus",
-         tags="wuerzburg familie", cta="Wohnung ansehen",
-         photos=[("int-living-2", "Wohnbereich mit Küchenzeile"), ("int-bath-1", "Bad mit Dusche"), ("wue-bridge", "Alte Mainbrücke, wenige Gehminuten entfernt")]),
-    dict(id="thue-elefant", unit="Thüngen – Elefant", place="Thüngen · Schlossberg", name="Elefant",
-         facts="65 m² · bis 6 Gäste · Hund willkommen", rating="9,1", rating_title="Booking.com, Wohnen am Schlossberg", badge="Hunde willkommen",
-         tags="thuengen hund familie gruppe", cta="Anfragen",
-         photos=[("int-living-3", "Wohnzimmer mit Parkett"), ("int-kitchen-1", "Küche"), ("thue-schloss", "Schloss Thüngen, um die Ecke")]),
-    dict(id="thue-zebra", unit="Thüngen – Zebra", place="Thüngen · Schlossberg", name="Zebra",
-         facts="65 m² · bis 6 Gäste · Hund willkommen", rating="9,1", rating_title="Booking.com, Wohnen am Schlossberg", badge="",
-         tags="thuengen hund familie gruppe", cta="Anfragen",
-         photos=[("int-living-1", "Wohnzimmer"), ("int-dining-1", "Essbereich"), ("wein-stein", "Weinberge im Fränkischen Weinland")]),
-    dict(id="thue-giraffe", unit="Thüngen – Giraffe", place="Thüngen · Schlossberg", name="Giraffe",
-         facts="65 m² · bis 4 Gäste · Hund willkommen", rating="9,1", rating_title="Booking.com, Wohnen am Schlossberg", badge="",
-         tags="thuengen hund familie", cta="Anfragen",
-         photos=[("int-bedroom-1", "Wohnbereich"), ("int-bath-1", "Bad"), ("thue-schloss", "Schloss Thüngen")]),
-    dict(id="thue-blauer-reiter", unit="Thüngen – Blauer Reiter", place="Thüngen · Haus Kämpf", name="Blauer Reiter",
-         facts="65 m² · Schlafzimmer mit Doppelbett", rating="9,1", rating_title="Booking.com, Wohnen am Schlossberg", badge="Eichen-Unikate",
-         tags="thuengen hund", cta="Anfragen",
-         photos=[("int-bedroom-2", "Schlafzimmer mit Doppelbett"), ("oak-wood", "Eichenholz aus dem eigenen Sägewerk"), ("wein-stein", "Weinberge")]),
-]
-
-SIZES_CARD = "(min-width: 1100px) 400px, (min-width: 640px) 50vw, 100vw"
-
-
-def card(l):
-    badge = f'<span class="badge">{l["badge"]}</span>' if l["badge"] else ""
-    extra = badge + f'<button class="save-btn" type="button" data-save="{l["id"]}" aria-label="{l["name"]} merken" aria-pressed="false">{HEART}</button>'
-    if l.get("href"):
-        cover = f'<a class="cover" href="{l["href"]}" aria-label="{l["name"]} ansehen"></a>'
-    else:
-        cover = f'<a class="cover" href="#anfrage" data-unit="{l["unit"]}" aria-label="{l["name"]} anfragen"></a>'
-    return f"""<article class="listing reveal" data-tags="{l["tags"]}">
-  {cover}
-  {slider(P, l["photos"], SIZES_CARD, extra)}
-  <div class="listing-body">
-    <div class="listing-top"><h3>{l["name"]}</h3><span class="rating" title="{l["rating_title"]}">{icon("star", 13)} {l["rating"]}</span></div>
-    <p>{l["place"]}</p>
-    <p class="facts">{l["facts"]}</p>
-    <p class="listing-cta"><strong>{l["cta"]}</strong> · Preis auf Anfrage</p>
-  </div>
-</article>"""
-
-
 REGION = [
-    ("wue-residenz", "Residenz Würzburg", "UNESCO-Welterbe mit Tiepolos berühmtem Deckenfresko."),
-    ("wue-bridge", "Brückenschoppen", "Ein Glas Silvaner auf der Alten Mainbrücke, die Festung im Abendlicht."),
-    ("wue-festung", "Festung Marienberg", "Hoch über der Stadt – der schönste Blick auf Würzburg."),
-    ("wein-stein", "Würzburger Stein", "Weinwandern zwischen den Steillagen direkt über dem Main."),
-    ("wue-main", "Am Mainufer", "Spazieren, Schiffe schauen, Radeln am Main-Radweg."),
-    ("thue-schloss", "Schloss Thüngen", "Ruhig, ländlich, mitten im Fränkischen Weinland."),
+    ("wue-residenz", "Residenz Würzburg", "UNESCO-Welterbe mit Tiepolos berühmtem Deckenfresko.", "ausfluege/#wuerzburg"),
+    ("wue-bridge", "Brückenschoppen", "Ein Glas Silvaner auf der Alten Mainbrücke, die Festung im Abendlicht.", "ausfluege/#wuerzburg"),
+    ("wue-festung", "Festung Marienberg", "Hoch über der Stadt – der schönste Blick auf Würzburg.", "ausfluege/#wuerzburg"),
+    ("veits-hofgarten", "Veitshöchheim", "Mit dem Schiff zum Rokokogarten.", "ausfluege/#wuerzburg"),
+    ("thue-werntal", "Werntal", "Wandern und Radeln direkt ab Thüngen.", "ausfluege/#weinland"),
+    ("karlstadt-karlsburg", "Karlsburg", "Burgruine hoch über dem Main bei Karlstadt.", "ausfluege/#weinland"),
+    ("volkach-mainschleife", "Volkach", "Weindorf an der Mainschleife.", "ausfluege/#weinland"),
 ]
 
 # Bewertungen: nur belegbare Angaben. Echte Gästezitate später in "quote" eintragen
@@ -68,30 +26,30 @@ REVIEWS = [
          quote="Auch auf dem französischen Ferienportal gut bewertet.", summary=False),
 ]
 MARQUEE = ["Check-in ab 15 Uhr", "Hunde in Thüngen willkommen", "Kostenloses WLAN", "Parken am Haus in Thüngen",
-           "Babybett in Würzburg", "Persönliche Schlüsselübergabe", "Möbel aus eigener Eiche", "Direkt beim Gastgeber"]
+           "Babybett in allen Würzburger Wohnungen", "Waschmaschine in Würzburg", "Möbel aus eigener Eiche", "Direkt beim Gastgeber"]
 
 FAQ = [
     ("Wann kann ich anreisen und abreisen?", "Check-in ist ab 15 Uhr, Check-out bis 11 Uhr. Kommen Sie später an, sagen Sie uns einfach Bescheid – wir stimmen die Schlüsselübergabe mit Ihnen ab."),
-    ("Darf mein Hund mit?", "In unseren Ferienwohnungen in Thüngen sind Hunde herzlich willkommen. In der Altstadtwohnung in Würzburg sind Haustiere leider nicht erlaubt."),
-    ("Wo parke ich in Würzburg?", "Kostenlos parken Sie auf der Talavera am Mainufer. Von dort sind es wenige Minuten zu Fuß in die Altstadt."),
-    ("Sind Kinder willkommen?", "Sehr gern. In Würzburg steht ein Babybett bereit, in Thüngen haben die größeren Wohnungen Platz für bis zu sechs Personen."),
+    ("Darf mein Hund mit?", "In unseren <a class=\"u-link\" href=\"thuengen/\">Ferienwohnungen in Thüngen</a> sind Hunde herzlich willkommen. In den Würzburger Wohnungen sind Haustiere leider nicht erlaubt."),
+    ("Wo parke ich in Würzburg?", "Kostenlos parken Sie auf der Talavera am Mainufer. Von dort sind es wenige Minuten zu Fuß in die Altstadt. Die Wohnung <a class=\"u-link\" href=\"wuerzburg/am-kulturspeicher/\">Am Kulturspeicher</a> hat einen eigenen Parkplatz."),
+    ("Wir sind eine große Familie oder Gruppe – welche Wohnung passt?", "In Würzburg die <a class=\"u-link\" href=\"wuerzburg/annastrasse/\">Annastraße</a> für bis zu 8 Personen, in Thüngen die Wohnungen <a class=\"u-link\" href=\"thuengen/elefant/\">Elefant</a> und <a class=\"u-link\" href=\"thuengen/zebra/\">Zebra</a> für bis zu 6."),
     ("Wie funktioniert die Buchung?", "Sie senden uns eine unverbindliche Anfrage mit Wunschzeitraum. Wir melden uns persönlich mit Verfügbarkeit und Preis. Erst wenn Sie zusagen, ist die Buchung fest."),
     ("Gibt es WLAN?", "Ja, in allen Ferienwohnungen gibt es kostenloses WLAN."),
 ]
 
-JSONLD = json.dumps({
-    "@context": "https://schema.org",
-    "@graph": [
-        {"@type": "WebSite", "@id": "https://www.fewo-urlaub.com/#website", "url": "https://www.fewo-urlaub.com/", "name": "Ferienwohnungen Voll", "inLanguage": "de-DE", "publisher": {"@id": "https://www.fewo-urlaub.com/#host"}},
-        {"@type": "LodgingBusiness", "@id": "https://www.fewo-urlaub.com/#host", "name": "Ferienwohnungen Voll – Würzburg & Thüngen", "url": "https://www.fewo-urlaub.com/",
-         "telephone": "+49 9360 99183", "image": "https://www.fewo-urlaub.com/assets/photos/wue-hero-1920.jpg",
-         "address": {"@type": "PostalAddress", "streetAddress": "Gartenstraße 11", "postalCode": "97289", "addressLocality": "Thüngen", "addressRegion": "Bayern", "addressCountry": "DE"},
-         "checkinTime": "15:00", "checkoutTime": "11:00", "petsAllowed": "Hunde in den Ferienwohnungen in Thüngen willkommen",
-         "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Kostenloses WLAN", "value": True}, {"@type": "LocationFeatureSpecification", "name": "Kostenlose Parkplätze am Haus (Thüngen)", "value": True}],
-         "founder": [{"@type": "Person", "name": "Carolin Voll"}, {"@type": "Person", "name": "Stefan Voll"}], "sameAs": ["https://hugokaempf.de/"]},
-        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
-    ],
-}, ensure_ascii=False, indent=2)
+JSONLD = [
+    {"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": "Ferienwohnungen Voll", "inLanguage": "de-DE", "publisher": {"@id": f"{SITE}/#host"}},
+    {"@type": "LodgingBusiness", "@id": f"{SITE}/#host", "name": "Ferienwohnungen Voll – Würzburg & Thüngen", "url": f"{SITE}/",
+     "telephone": "+49 9360 99183", "image": photo_url("wue-hero"), "priceRange": "Preis auf Anfrage",
+     "address": {"@type": "PostalAddress", "streetAddress": "Gartenstraße 11", "postalCode": "97289", "addressLocality": "Thüngen", "addressRegion": "Bayern", "addressCountry": "DE"},
+     "areaServed": ["Würzburg", "Thüngen", "Fränkisches Weinland"],
+     "checkinTime": "15:00", "checkoutTime": "11:00", "petsAllowed": "Hunde in den Ferienwohnungen in Thüngen willkommen",
+     "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Kostenloses WLAN", "value": True}, {"@type": "LocationFeatureSpecification", "name": "Kostenlose Parkplätze am Haus (Thüngen)", "value": True}],
+     "founder": [{"@type": "Person", "name": "Carolin Voll"}, {"@type": "Person", "name": "Stefan Voll"}], "sameAs": ["https://hugokaempf.de/"]},
+    {"@type": "ItemList", "name": "Ferienwohnungen in Würzburg und Thüngen", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "url": f"{SITE}/{a['path']}", "name": a["name"]} for i, a in enumerate(APARTMENTS)]},
+    ld_faq(FAQ),
+]
 
 
 def review_card(r):
@@ -104,20 +62,53 @@ def review_card(r):
             </figure>"""
 
 
+def inquiry_form(prefix):
+    """Anfrageformular – auf der Startseite und auf „Anreise & Kontakt“."""
+    def opts(city):
+        return "".join(f"<option>{a['unit']}</option>" for a in APARTMENTS if a["city"] == city)
+
+    return f"""<form class="form" id="anfrage-form" name="anfrage" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-inquiry novalidate>
+        <input type="hidden" name="form-name" value="anfrage">
+        <input type="hidden" name="gaeste" data-bind="guests">
+        <p class="hp"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
+        <div class="field"><label for="f-unit">Unterkunft</label>
+          <select id="f-unit" name="wohnung">
+            <option>Noch offen – bitte beraten</option>
+            <optgroup label="Würzburg"><option>Würzburg – egal welche</option>{opts("wuerzburg")}</optgroup>
+            <optgroup label="Thüngen"><option>Thüngen – egal welche</option>{opts("thuengen")}</optgroup>
+          </select></div>
+        <div class="form-row">
+          <div class="field"><label for="f-in">Anreise</label><input id="f-in" name="anreise" type="date" data-bind="start" required></div>
+          <div class="field"><label for="f-out">Abreise</label><input id="f-out" name="abreise" type="date" data-bind="end" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><span class="label">Gäste</span><button class="field-btn" type="button" data-open="pop-guests-form" data-sheet="sheet-guests" style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-radius:var(--r-md);box-shadow:inset 0 0 0 1px var(--line-strong);background:var(--surface);width:100%"><span data-show="guests">2 Gäste</span>{icon("down", 18)}</button></div>
+          <div class="field"><label for="f-dog">Hund dabei?</label><select id="f-dog" name="hund"><option>Nein</option><option>Ja</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="f-msg">Nachricht <span class="muted">(optional)</span></label><textarea id="f-msg" name="nachricht" placeholder="Anlass, Anreisezeit, besondere Wünsche …"></textarea></div>
+        <label class="check"><input type="checkbox" name="datenschutz" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden (<a class="u-link" href="{prefix}datenschutz/">Datenschutz</a>).</span></label>
+        <button class="btn btn--accent btn--lg btn--block" type="submit">Unverbindlich anfragen {icon("arrow", 18, "go")}</button>
+        <p class="form-note">Noch keine Buchung und keine Zahlung. Wir antworten persönlich.</p>
+        {status_box()}
+      </form>"""
+
+
 def build():
-    cards = "\n".join(card(l) for l in LISTINGS)
+    n_wue = sum(a["city"] == "wuerzburg" for a in APARTMENTS)
+    n_thue = sum(a["city"] == "thuengen" for a in APARTMENTS)
+    cards = "\n".join(card(P, a, (i % 3) * 0.06) for i, a in enumerate(APARTMENTS))
     reviews = "\n".join(review_card(r) for r in REVIEWS)
     marquee = "".join(f'<span>{icon("check", 16)}{m}</span>' for m in MARQUEE * 2)
     marquee_label = "Auf einen Blick: " + ", ".join(MARQUEE)
     region = "\n".join(
-        f'<article class="tile zoom">{img(P, s, t, "300px")}<h3>{t}</h3><p>{d}</p></article>' for s, t, d in REGION
+        f'<a class="tile zoom" href="{h}">{img(P, s, t, "300px")}<h3>{t}</h3><p>{d}</p></a>' for s, t, d, h in REGION
     )
-    faq = "\n".join(
-        f'<details name="faq"{" open" if i == 0 else ""}><summary>{q}{icon("down", 18)}</summary><div class="answer">{a}</div></details>'
-        for i, (q, a) in enumerate(FAQ)
-    )
-    return f"""{head(P, "Ferienwohnungen Würzburg Altstadt &amp; Thüngen | Direkt beim Gastgeber", "Ferienwohnungen mitten in der Würzburger Altstadt und am Schlossberg in Thüngen. Eingerichtet mit Eiche aus dem eigenen Sägewerk, Hunde in Thüngen willkommen. Direkt beim Gastgeber anfragen.", "https://www.fewo-urlaub.com/", "wue-hero", JSONLD)}
-<body data-max-guests="6">
+    return f"""{head(P, "Ferienwohnungen Würzburg &amp; Thüngen | Direkt beim Gastgeber", "Zwölf Ferienwohnungen in der Würzburger Altstadt und am Schlossberg in Thüngen – mit Eiche aus eigenem Sägewerk, Hunde in Thüngen willkommen. Direkt anfragen.", "", "wue-hero", JSONLD)}
+<body data-max-guests="8">
 {sprite()}
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 {header(P, "home")}
@@ -130,7 +121,7 @@ def build():
       <div class="hero-content">
         <span class="kicker">{icon("pin", 16)} Würzburg &amp; Thüngen<span class="hide-sm">&nbsp;· Fränkisches Weinland</span></span>
         <h1 id="hero-title">Franken wohnen.<br>Nicht nur besuchen.</h1>
-        <p class="lead">Fünf Ferienwohnungen – mitten in der Würzburger Altstadt oder ruhig am Schlossberg. Persönlich vermietet von einer Familie, die seit Generationen mit Eichenholz arbeitet.</p>
+        <p class="lead">Zwölf Ferienwohnungen – {n_wue} mitten in Würzburg, {n_thue} ruhig in Thüngen. Persönlich vermietet von einer Familie, die seit Generationen mit Eichenholz arbeitet.</p>
       </div>
     </div>
   </section>
@@ -147,7 +138,7 @@ def build():
       <button class="search-field" type="button" data-open="pop-guests" data-sheet="sheet-guests"><span class="label">Gäste</span><span class="value is-set" data-show="guests">2 Gäste</span></button>
       <button class="btn btn--accent" type="submit">{icon("search", 18)} Anfragen</button>
       <div class="popover popover--cal" id="pop-cal" data-after-range="pop-guests">{cal_panel()}</div>
-      <div class="popover popover--guests" id="pop-guests">{guests_panel(6, "In Thüngen bis 6, in Würzburg bis 4 Gäste.")}</div>
+      <div class="popover popover--guests" id="pop-guests">{guests_panel(8, "In Würzburg bis 8 (Annastraße), in Thüngen bis 6 Gäste.")}</div>
     </form>
   </div>
 
@@ -164,20 +155,20 @@ def build():
   <section class="section" id="unterkuenfte" aria-labelledby="u-title">
     <div class="container">
       <div class="sec-head">
-        <div><span class="kicker">Unsere Unterkünfte</span><h2 id="u-title">Fünf Wohnungen, zwei Welten.</h2></div>
+        <div><span class="kicker">Unsere Unterkünfte</span><h2 id="u-title">Zwölf Wohnungen, zwei Welten.</h2></div>
       </div>
       <div class="chips" role="group" aria-label="Unterkünfte filtern">
         <button class="chip" type="button" data-filter="alle" aria-pressed="true">Alle</button>
-        <button class="chip" type="button" data-filter="wuerzburg" aria-pressed="false">{icon("church", 16)} Würzburg Altstadt</button>
+        <button class="chip" type="button" data-filter="wuerzburg" aria-pressed="false">{icon("church", 16)} Würzburg</button>
         <button class="chip" type="button" data-filter="thuengen" aria-pressed="false">{icon("wine", 16)} Thüngen</button>
         <button class="chip" type="button" data-filter="hund" aria-pressed="false">{icon("paw", 16)} Mit Hund</button>
-        <button class="chip" type="button" data-filter="familie" aria-pressed="false">{icon("baby", 16)} Für Familien</button>
-        <button class="chip" type="button" data-filter="gruppe" aria-pressed="false">{icon("users", 16)} Bis 6 Personen</button>
+        <button class="chip" type="button" data-filter="gruppe" aria-pressed="false">{icon("users", 16)} Ab 6 Gästen</button>
+        <button class="chip" type="button" data-filter="parkplatz" aria-pressed="false">{icon("parking", 16)} Mit Parkplatz</button>
       </div>
       <p class="filter-count" data-filter-count aria-live="polite"></p>
       <div class="listings">
 {cards}
-        <aside class="advice reveal" data-tags="wuerzburg thuengen hund familie gruppe">
+        <aside class="advice reveal" data-tags="wuerzburg thuengen hund gruppe parkplatz">
           <span class="kicker">Unsicher, welche passt?</span>
           <h3>Sagen Sie uns, wer mitkommt. Wir sagen Ihnen, welche Wohnung passt.</h3>
           <p class="muted">Paar auf Städtereise, Familie mit Hund oder Wandergruppe – wir kennen jede Wohnung persönlich.</p>
@@ -191,26 +182,26 @@ def build():
   <section class="section section--flush" id="orte" aria-labelledby="o-title">
     <div class="container">
       <div class="sec-head"><div><span class="kicker">Zwei Orte</span><h2 id="o-title">Stadt am Morgen, Weinberg am Abend.</h2></div>
-        <p class="lead" style="max-width:44ch">Würzburg und Thüngen liegen nah beieinander – und fühlen sich doch ganz verschieden an.</p></div>
+        <p class="lead" style="max-width:44ch">Würzburg und Thüngen liegen nur 25 km auseinander – und fühlen sich doch ganz verschieden an.</p></div>
       <div class="places">
         <article class="place reveal">
           {img(P, "wue-festung", "Festung Marienberg über Würzburg", "(min-width: 900px) 50vw, 100vw")}
           <div class="place-body">
-            <span class="kicker" style="color:rgba(255,255,255,.8)">Würzburg · Altstadt</span>
+            <span class="kicker" style="color:rgba(255,255,255,.8)">Würzburg · Altstadt &amp; Innenstadt</span>
             <h3>Die Altstadt vor der Haustür.</h3>
-            <p>Wohnen im Haus, in dem Tilman Riemenschneider lebte – zwischen Dom und Alter Mainbrücke. Das Auto bleibt stehen.</p>
-            <div class="place-tags"><span>2–4 Gäste</span><span>50 m²</span><span>Historisches Haus</span></div>
-            <a class="btn btn--white" href="wuerzburg/altstadt/">Zur Wohnung {icon("arrow", 16, "go")}</a>
+            <p>{n_wue} Stadtwohnungen zwischen Dom, Marktplatz und Main – eine davon im Haus, in dem Tilman Riemenschneider lebte. Das Auto bleibt stehen.</p>
+            <div class="place-tags"><span>2–8 Gäste</span><span>35–60 m²</span><span>Alles zu Fuß</span></div>
+            <a class="btn btn--white" href="wuerzburg/">Ferienwohnungen Würzburg {icon("arrow", 16, "go")}</a>
           </div>
         </article>
         <article class="place reveal" style="--d:.08s">
-          {img(P, "wein-stein", "Weinberge im Fränkischen Weinland im Herbst", "(min-width: 900px) 50vw, 100vw")}
+          {img(P, "thue-werntal", "Das Werntal bei Thüngen mit Feldern und Wald", "(min-width: 900px) 50vw, 100vw")}
           <div class="place-body">
             <span class="kicker" style="color:rgba(255,255,255,.8)">Thüngen · Schlossberg</span>
             <h3>Ruhe am Schlossberg, Wein vor der Tür.</h3>
-            <p>Vier Wohnungen im Haus Kämpf, nordwestlich von Würzburg. Zu Fuß in die Weinberge, mit dem Rad an den Main.</p>
+            <p>{n_thue} großzügige Wohnungen nordwestlich von Würzburg. Garten am Bach, zu Fuß in die Weinberge, mit dem Rad ins Werntal.</p>
             <div class="place-tags"><span>Bis 6 Gäste</span><span>Hunde willkommen</span><span>Parken am Haus</span></div>
-            <a class="btn btn--white" href="#unterkuenfte" data-filter-link="thuengen">Wohnungen ansehen {icon("arrow", 16, "go")}</a>
+            <a class="btn btn--white" href="thuengen/">Ferienwohnungen Thüngen {icon("arrow", 16, "go")}</a>
           </div>
         </article>
       </div>
@@ -221,13 +212,13 @@ def build():
   <section class="section" id="eiche" aria-labelledby="e-title">
     <div class="container story">
       <div class="story-media reveal">
-        {img(P, "oak-wood", "Eichenholz aus dem Sägewerk Hugo Kämpf", "(min-width: 960px) 360px, 60vw")}
-        {img(P, "thue-schloss", "Thüngen mit Schloss", "(min-width: 960px) 260px, 40vw")}
+        {img(P, "fewo/thue-haus/05", "Langer Esstisch aus Eiche vor dem Haus Kämpf in Thüngen", "(min-width: 960px) 360px, 60vw")}
+        {img(P, "fewo/thue-elefant/01", "Couchtisch aus einer Eichenbohle", "(min-width: 960px) 260px, 40vw")}
       </div>
       <div class="story-text reveal" style="--d:.08s">
         <span class="kicker">Hugo Kämpf · Sägewerk in Thüngen</span>
         <h2 id="e-title">Ihr Esstisch hat eine Herkunft. Sie liegt nebenan.</h2>
-        <p class="lead">Hinter den Ferienwohnungen steht Hugo Kämpf – ein Sägewerk für Eichenschnittholz, seit Generationen in Thüngen. Tische, Waschtische, Wandverkleidungen aus Altholz: Vieles, was Sie bei uns anfassen, ist hier entstanden.</p>
+        <p class="lead">Hinter den Ferienwohnungen steht Hugo Kämpf – ein Sägewerk für Eichenschnittholz, seit Generationen in Thüngen. Live-Edge-Tische, Waschtische, Wandverkleidungen aus Altholz: Vieles, was Sie bei uns anfassen, ist hier entstanden.</p>
         <div class="facts-row">
           <div><strong>150+</strong><span>Jahre Eiche aus Thüngen</span></div>
           <div><strong>FSC®</strong><span>zertifizierte Lieferkette seit 2004</span></div>
@@ -243,9 +234,12 @@ def build():
     <div class="container">
       <div class="sec-head">
         <div><span class="kicker">Ausflüge &amp; Region</span><h2 id="r-title">Was Sie nicht verpassen sollten.</h2></div>
-        <div class="scroller-nav" data-scroller="region-track">
-          <button class="icon-btn" type="button" aria-label="Zurück">{icon("left", 16)}</button>
-          <button class="icon-btn" type="button" aria-label="Weiter">{icon("right", 16)}</button>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="btn btn--light btn--sm" href="ausfluege/">Alle Tipps</a>
+          <div class="scroller-nav" data-scroller="region-track">
+            <button class="icon-btn" type="button" aria-label="Zurück">{icon("left", 16)}</button>
+            <button class="icon-btn" type="button" aria-label="Weiter">{icon("right", 16)}</button>
+          </div>
         </div>
       </div>
       <div class="scroller" id="region-track">
@@ -283,9 +277,9 @@ def build():
   <section class="section section--flush" id="faq" aria-labelledby="f-title">
     <div class="container faq-grid">
       <div class="sec-head" style="display:grid;align-content:start"><div><span class="kicker">Häufige Fragen</span><h2 id="f-title">Gut zu wissen.</h2>
-        <p class="muted">Ihre Frage ist nicht dabei? Rufen Sie uns an: <a class="u-link" href="tel:+49936099183">09360 99183</a></p></div></div>
+        <p class="muted">Ihre Frage ist nicht dabei? Rufen Sie uns an: <a class="u-link" href="tel:{PHONE}">{PHONE_LABEL}</a></p></div></div>
       <div class="faq">
-{faq}
+{faq_list(FAQ)}
       </div>
     </div>
   </section>
@@ -296,59 +290,13 @@ def build():
       <div style="display:grid;gap:24px">
         <div style="display:grid;gap:12px"><span class="kicker">Direkt beim Gastgeber</span><h2 id="a-title">Wann dürfen wir Sie begrüßen?</h2>
           <p class="lead">Schreiben Sie uns Ihren Wunschzeitraum – wir antworten persönlich mit Verfügbarkeit und Preis.</p></div>
-        <div class="host-card">
-          <div class="host-head"><div class="avatars" aria-hidden="true"><span>C</span><span>S</span></div><div><strong>Carolin &amp; Stefan Voll</strong><div class="muted" style="font-size:.9rem">Ihre Gastgeber in Würzburg &amp; Thüngen</div></div></div>
-          <ul class="host-facts">
-            <li>{icon("chat")} Persönliche Antwort, kein Callcenter</li>
-            <li>{icon("receipt")} Keine Servicegebühr eines Buchungsportals</li>
-            <li>{icon("check")} Unverbindlich – Sie entscheiden nach dem Angebot</li>
-          </ul>
-          <div class="contact-links">
-            <a href="tel:+49936099183"><span><small>Telefon</small>09360 99183</span>{icon("phone", 18)}</a>
-            <button type="button" data-copy="Gartenstraße 11, 97289 Thüngen" data-toast="Adresse kopiert"><span><small>Adresse</small>Gartenstraße 11, 97289 Thüngen</span>{icon("copy", 18)}</button>
-          </div>
-        </div>
+        {host_card(P)}
       </div>
 
-      <form class="form" id="anfrage-form" name="anfrage" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-inquiry novalidate>
-        <input type="hidden" name="form-name" value="anfrage">
-        <input type="hidden" name="gaeste" data-bind="guests">
-        <p class="hp"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
-        <div class="field"><label for="f-unit">Unterkunft</label>
-          <select id="f-unit" name="wohnung">
-            <option>Noch offen – bitte beraten</option>
-            <option>Würzburg – Das Herzstück der Altstadt</option>
-            <option>Thüngen – egal welche</option>
-            <option>Thüngen – Elefant</option>
-            <option>Thüngen – Zebra</option>
-            <option>Thüngen – Giraffe</option>
-            <option>Thüngen – Blauer Reiter</option>
-          </select></div>
-        <div class="form-row">
-          <div class="field"><label for="f-in">Anreise</label><input id="f-in" name="anreise" type="date" data-bind="start" required></div>
-          <div class="field"><label for="f-out">Abreise</label><input id="f-out" name="abreise" type="date" data-bind="end" required></div>
-        </div>
-        <div class="form-row">
-          <div class="field"><span class="label">Gäste</span><button class="field-btn" type="button" data-open="pop-guests-form" data-sheet="sheet-guests" style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-radius:var(--r-md);box-shadow:inset 0 0 0 1px var(--line-strong);background:var(--surface);width:100%"><span data-show="guests">2 Gäste</span>{icon("down", 18)}</button></div>
-          <div class="field"><label for="f-dog">Hund dabei?</label><select id="f-dog" name="hund"><option>Nein</option><option>Ja</option></select></div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-        </div>
-        <div class="field"><label for="f-msg">Nachricht <span class="muted">(optional)</span></label><textarea id="f-msg" name="nachricht" placeholder="Anlass, Anreisezeit, besondere Wünsche …"></textarea></div>
-        <label class="check"><input type="checkbox" name="datenschutz" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden (<a class="u-link" href="datenschutz/">Datenschutz</a>).</span></label>
-        <button class="btn btn--accent btn--lg btn--block" type="submit">Unverbindlich anfragen {icon("arrow", 18, "go")}</button>
-        <p class="form-note">Noch keine Buchung und keine Zahlung. Wir antworten persönlich.</p>
-        {status_box()}
-      </form>
+      {inquiry_form(P)}
     </div>
   </section>
 </main>
 
-{footer(P)}
-{sheets(6, "In Thüngen bis 6, in Würzburg bis 4 Gäste.")}
-<script src="js/main.js" defer></script>
-</body>
-</html>
-"""
+{page_end(P, sheets(8, "In Würzburg bis 8 (Annastraße), in Thüngen bis 6 Gäste."))}"""
+
