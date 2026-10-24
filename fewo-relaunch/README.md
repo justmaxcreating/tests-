@@ -49,6 +49,13 @@ Aufbau-Prinzipien von großen Buchungsplattformen übernommen, Optik eigenständ
 - **Details:** weiche, mehrlagige Schatten, 1-px-Konturen statt harter Rahmen, Bilder blenden beim Laden ein, Herz-„Pop“, Stepper-Bump, gezeichneter Haken bei der Erfolgsmeldung.
 - `prefers-reduced-motion` wird respektiert, alles ist per Tastatur bedienbar.
 
+### Komponenten von 21st.dev
+
+Zwei Bausteine sind nach Vorlagen von [21st.dev](https://21st.dev) gebaut und in reines HTML/CSS/JS übertragen (die Originale sind React):
+
+- **Bewertungen** nach „Testimonials Section with Logo Marquee“ (@kedhareswer): Snap-Slider mit Pfeilen und Punkten, Tastatursteuerung, Laufband. Inhalte sind nur belegbare Noten; echte Gästezitate können später eingesetzt werden.
+- **Foto-Slider der Karten** nach „Image Swiper“ (@lukacho): mit der Maus ziehbar (ab 10 px wird geblättert), Zähler beim Hovern, Klick aufs Foto öffnet die Wohnung.
+
 ## Fotos
 
 `plugins/fetch-photos` lädt beim Netlify-Build Fotos und legt sie unter `assets/photos/<slot>-960.jpg` / `-1920.jpg` ab:

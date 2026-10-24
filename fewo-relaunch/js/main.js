@@ -59,13 +59,14 @@
     toastT = setTimeout(() => toast.classList.remove("is-visible"), 2200);
   };
 
-  /* ---------- Foto-Slider in Karten ---------- */
+  /* ---------- Foto-Slider (Wischen, Ziehen mit der Maus nach 21st.dev „Image Swiper“) ---------- */
   $$("[data-slider]").forEach((slider) => {
     const track = $(".slider-track", slider);
     const prev = $(".slider-btn.prev", slider);
     const next = $(".slider-btn.next", slider);
     const dots = $$(".dots i", slider);
-    const count = $(".gallery-count", slider.parentElement);
+    const counter = $(".slider-count", slider);
+    const extCount = $(".gallery-count", slider.parentElement);
     const n = track.children.length;
     const idx = () => Math.round(track.scrollLeft / track.clientWidth);
     const sync = () => {
@@ -73,13 +74,80 @@
       dots.forEach((d, k) => d.classList.toggle("on", k === i));
       if (prev) prev.disabled = i <= 0;
       if (next) next.disabled = i >= n - 1;
-      if (count) count.textContent = `${i + 1} / ${n}`;
+      if (counter) counter.textContent = `${i + 1} / ${n}`;
+      if (extCount) extCount.textContent = `${i + 1} / ${n}`;
     };
-    const go = (d) => (e) => { e.preventDefault(); e.stopPropagation(); track.scrollBy({ left: d * track.clientWidth, behavior: "smooth" }); };
-    prev && prev.addEventListener("click", go(-1));
-    next && next.addEventListener("click", go(1));
+    const goTo = (i) => track.scrollTo({ left: Math.max(0, Math.min(n - 1, i)) * track.clientWidth, behavior: reduceMotion ? "auto" : "smooth" });
+    const step = (d) => (e) => { e.preventDefault(); e.stopPropagation(); goTo(idx() + d); };
+    prev && prev.addEventListener("click", step(-1));
+    next && next.addEventListener("click", step(1));
     track.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+
+    /* Maus: ziehen wie auf dem Handy; ab 10 px Weg wird geblättert */
+    let start = null, moved = 0;
+    track.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      start = { x: e.clientX, left: track.scrollLeft, i: idx() };
+      moved = 0;
+    });
+    addEventListener("pointermove", (e) => {
+      if (!start) return;
+      moved = e.clientX - start.x;
+      if (Math.abs(moved) > 3) slider.classList.add("is-dragging");
+      track.scrollLeft = start.left - moved;
+    });
+    addEventListener("pointerup", () => {
+      if (!start) return;
+      const from = start.i;
+      start = null;
+      slider.classList.remove("is-dragging");
+      goTo(moved <= -10 ? from + 1 : moved >= 10 ? from - 1 : from);
+    });
+    /* Klick aufs Foto öffnet die Wohnung (außer nach dem Ziehen) */
+    const cover = slider.closest(".listing") && $("a.cover", slider.closest(".listing"));
+    track.addEventListener("click", (e) => {
+      if (Math.abs(moved) > 3) { e.preventDefault(); moved = 0; return; }
+      if (cover) cover.click();
+    });
     sync();
+  });
+
+  /* ---------- Bewertungen: Snap-Slider mit Punkten (nach 21st.dev „Testimonials Section“) ---------- */
+  $$("[data-rv]").forEach((track) => {
+    const wrap = track.parentElement;
+    const nav = $(".rv-nav", wrap);
+    const dotsEl = $("[data-rv-dots]", wrap);
+    const count = track.children.length;
+    let pages = 1;
+    const page = () => {
+      const card = track.firstElementChild;
+      const per = Math.max(1, Math.round(track.clientWidth / Math.max(1, card ? card.offsetWidth : track.clientWidth)));
+      pages = Math.max(1, Math.ceil(count / per));
+      return Math.min(pages - 1, Math.max(0, Math.round(track.scrollLeft / Math.max(1, track.clientWidth - 1))));
+    };
+    const render = () => {
+      const i = page();
+      nav.hidden = pages <= 1;
+      if (dotsEl.children.length !== pages) {
+        dotsEl.innerHTML = Array.from({ length: pages }, (_, k) => `<button type="button" aria-label="Seite ${k + 1}"></button>`).join("");
+        $$("button", dotsEl).forEach((b, k) => b.addEventListener("click", () => track.scrollTo({ left: k * track.clientWidth })));
+      }
+      $$("button", dotsEl).forEach((b, k) => b.setAttribute("aria-current", String(k === i)));
+    };
+    const turn = (dir) => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (dir > 0 && track.scrollLeft >= max - 4) track.scrollTo({ left: 0 });
+      else if (dir < 0 && track.scrollLeft <= 4) track.scrollTo({ left: max });
+      else track.scrollBy({ left: dir * track.clientWidth });
+    };
+    $("[data-rv-prev]", wrap).addEventListener("click", () => turn(-1));
+    $("[data-rv-next]", wrap).addEventListener("click", () => turn(1));
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); turn(e.key === "ArrowRight" ? 1 : -1); }
+    });
+    track.addEventListener("scroll", () => requestAnimationFrame(render), { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(render).observe(track);
+    render();
   });
 
   /* ---------- Merken (Herz) ---------- */
