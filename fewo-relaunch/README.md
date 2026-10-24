@@ -7,6 +7,10 @@ Reines HTML/CSS/JS – kein Framework, kein Build-Schritt, keine externen Reques
 
 ## Ansehen
 
+**Vorschau online:** https://fewo-relaunch-vorschau.netlify.app/ (Netlify, Branch `fewo-relaunch`, per `noindex` von Suchmaschinen ausgeschlossen)
+
+Lokal:
+
 ```bash
 cd fewo-relaunch
 python3 -m http.server 8000
