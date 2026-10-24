@@ -125,6 +125,13 @@ def slider(prefix, photos, sizes, extra=""):
     )
 
 
+def avatars(prefix):
+    """Kleine Fotos der Gastgeber – rein schmückend, der Name steht im Text daneben."""
+    return ('<div class="avatars" aria-hidden="true">'
+            f'<img src="{prefix}assets/fewo/gastgeber/2.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">'
+            f'<img src="{prefix}assets/fewo/gastgeber/1.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></div>')
+
+
 HEART = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/></svg>'
 
 

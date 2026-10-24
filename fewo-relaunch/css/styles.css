@@ -727,3 +727,6 @@ a.tile:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
 .footer-grid h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .map-legend, .rank-list { list-style: none; margin: 0; padding: 0; }
 .sec-head .kicker { display: inline-flex; align-items: center; gap: 6px; }
+.avatars img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; border: 3px solid var(--surface); background: var(--sunken); }
+.avatars img + img { margin-left: -16px; }
+.host-row .avatars img { width: 46px; height: 46px; }

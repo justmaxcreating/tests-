@@ -14,7 +14,7 @@ def features(a):
     out = list(a["highlights"])
     if a["city"] == "wuerzburg":
         near = nearest(a)
-        out.append(("walk", "Alles zu Fuß erreichbar", ", ".join(f"{n.split(' (')[0]} ca. {m} Min." for n, m, _, _ in near) + "."))
+        out.append(("walk", "Zu Fuß unterwegs", "Zu Fuß: " + ", ".join(f"{n.split(' (')[0]} ca. {m} Min." for n, m, _, _ in near)))
         if a["parking"] == "talavera":
             out.append(("car", "Kostenlos parken", "Auf der Talavera am Mainufer – ohne Parkhausgebühren."))
     else:
@@ -291,7 +291,7 @@ def build(a):
       </section>
 
       <section>
-        <div class="host-row"><div class="avatars" aria-hidden="true"><span>C</span><span>S</span></div><div><strong>Ihre Gastgeber: Carolin &amp; Stefan</strong><div class="muted" style="font-size:.92rem">Familienbetrieb aus Thüngen · antworten persönlich</div></div></div>
+        <div class="host-row">{avatars(P)}<div><strong>Ihre Gastgeber: Carolin &amp; Stefan</strong><div class="muted" style="font-size:.92rem">Familienbetrieb aus Thüngen · antworten persönlich</div></div></div>
       </section>
 
       <section>

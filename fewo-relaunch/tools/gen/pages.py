@@ -218,7 +218,7 @@ def build_kontakt(form_html):
 
 def host_card(prefix):
     return f"""<div class="host-card">
-          <div class="host-head"><div class="avatars" aria-hidden="true"><span>C</span><span>S</span></div><div><strong>Carolin &amp; Stefan Voll</strong><div class="muted" style="font-size:.9rem">Ihre Gastgeber in Würzburg &amp; Thüngen</div></div></div>
+          <div class="host-head">{avatars(prefix)}<div><strong>Carolin &amp; Stefan Voll</strong><div class="muted" style="font-size:.9rem">Ihre Gastgeber in Würzburg &amp; Thüngen</div></div></div>
           <ul class="host-facts">
             <li>{icon("chat")} Persönliche Antwort, kein Callcenter</li>
             <li>{icon("receipt")} Keine Servicegebühr eines Buchungsportals</li>
