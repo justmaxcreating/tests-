@@ -1,5 +1,9 @@
-# Netlify: Seite liegt im Unterordner fewo-relaunch/ (statisch, kein Build)
+# Netlify: Seite liegt im Unterordner fewo-relaunch/ (statisch, kein Build-Schritt)
 [build]
   base = "fewo-relaunch"
   publish = "."
   command = ""
+
+# Lädt freie Fotos beim Build und hostet sie selbst (Pfad relativ zum base-Verzeichnis)
+[[plugins]]
+  package = "/plugins/fetch-photos"
