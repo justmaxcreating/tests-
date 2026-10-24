@@ -112,8 +112,10 @@ module.exports = {
     console.log(summary);
     const report = [];
     // Optional: Fotos zur visuellen Kontrolle in eine Figma-Datei hochladen (einmalige Upload-URLs per Env-Var)
-    if (process.env.PHOTO_CHECK_URLS) {
-      const urls = JSON.parse(process.env.PHOTO_CHECK_URLS);
+    const checkFile = path.join(__dirname, "check.json");
+    const check = fs.existsSync(checkFile) ? JSON.parse(fs.readFileSync(checkFile, "utf8")) : {};
+    if (check.urls) {
+      const urls = check.urls;
       const slots = Object.keys(SLOTS).filter((sl) => fs.existsSync(path.join(OUT, `${sl}-${SIZES[0]}.jpg`)));
       await Promise.all(slots.slice(0, urls.length).map(async (sl, i) => {
         try {
@@ -128,6 +130,6 @@ module.exports = {
     }
     utils.status.show({ title: "Fotos", summary, text: JSON.stringify(credits) });
     // Diagnose: Build bewusst abbrechen, damit das Ergebnis in der Deploy-Fehlermeldung steht (Live-Seite bleibt unverändert)
-    if (process.env.PHOTO_REPORT) utils.build.failBuild(`REPORT ${summary} | Figma: ${report.join("; ") || "keine URLs"} | Credits: ${Object.entries(credits).map(([k, v]) => k + "=" + v.title).join("; ")}`);
+    if (check.report) utils.build.failBuild(`REPORT ${summary} | Figma: ${report.join("; ") || "keine URLs"} | Credits: ${Object.entries(credits).map(([k, v]) => k + "=" + v.title).join("; ")}`);
   },
 };
