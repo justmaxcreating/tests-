@@ -3,7 +3,7 @@
 Designvorschlag für die Ferienwohnungs-Website von Carolin & Stefan Voll (Familie hinter dem Sägewerk Hugo Kämpf, Thüngen).
 Umfang: **Startseite** + **Detailseite der Würzburger Altstadtwohnung** („Das Herzstück der Altstadt“, Franziskanergasse 1A).
 
-Reines HTML/CSS/JS – kein Framework, kein Build-Schritt, keine externen Requests.
+Reines HTML/CSS/JS – kein Framework, keine externen Requests im Browser. Einziger Build-Schritt: ein kleines Netlify-Plugin lädt freie Fotos und hostet sie selbst (siehe *Fotos*).
 
 ## Ansehen
 
@@ -17,7 +17,7 @@ python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
-Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, verschickt nichts).
+Lokal läuft das Anfrageformular im **Demo-Modus** (zeigt die Erfolgsmeldung, verschickt nichts). Fotos gibt es lokal nur, wenn `assets/photos/` befüllt ist – sonst erscheinen Farbflächen als Platzhalter.
 
 ## Struktur
 
@@ -27,9 +27,10 @@ fewo-relaunch/
 ├── wuerzburg/altstadt/index.html Detailseite Würzburg (neue, sprechende URL)
 ├── css/styles.css                Design-System (Tokens oben in :root)
 ├── js/main.js                    Interaktionen
-├── assets/fonts/                 Fraunces + Inter, selbst gehostet (SIL OFL)
-├── assets/img/oak-grain.svg      Eichen-Maserung (Textur)
+├── assets/fonts/                 Plus Jakarta Sans, selbst gehostet (SIL OFL)
+├── assets/photos/                wird beim Netlify-Build befüllt (nicht im Repo)
 ├── assets/favicon.svg
+├── plugins/fetch-photos/         Netlify-Build-Plugin: lädt Fotos + Bildnachweise
 ├── robots.txt, sitemap.xml
 ├── _redirects                    301-Weiterleitungen alte → neue URLs (Netlify)
 └── preview/                      Screenshots für die Präsentation
@@ -37,22 +38,25 @@ fewo-relaunch/
 
 ## Design
 
-- **Typo:** Fraunces (Serif, Headlines, kursive Akzente in Eichenbraun) + Inter (Text).
-- **Farben:** warmes Papier `#f7f3ec`, Tinte `#1d1a16`, Eiche `#8a5a2b`, Bocksbeutel-Grün `#2f4a3a`.
-- **Schatten:** mehrlagig und sehr weich (`--shadow-xs` … `--shadow-lg`), dazu feine 1-px-Innenkonturen statt harter Rahmen.
-- **Micro-Interactions:**
-  - Navigation: Hover-Pille gleitet mit, Header bekommt beim Scrollen einen Blur.
-  - Buttons: Lichtpunkt folgt dem Cursor, Pfeil schiebt sich nach rechts.
-  - Karten: heben sich beim Hover, Bilder zoomen langsam.
-  - Gästezahl: Bump-Animation beim Zählen.
-  - Datumsfelder: Nächte werden live berechnet, das Abreise-Datum öffnet sich automatisch.
-  - Buchungskarte: Kontaktfelder klappen erst im zweiten Schritt auf.
-  - FAQ: animiertes Akkordeon.
-  - Lightbox: Tastatur- und Swipe-Steuerung.
-  - Kartenpin: pulsiert.
-  - Erfolgsmeldung: gezeichneter Haken.
-  - Reveal-Animationen beim Scrollen.
+Aufbau-Prinzipien von großen Buchungsplattformen übernommen, Optik eigenständig:
+
+- **Fotos führen:** großer Foto-Hero, Wohnungskarten mit Bilder-Slider (wischen auf dem Handy, Pfeile am Desktop), Bento-Galerie mit Lightbox auf der Detailseite.
+- **Scanbar:** Eckdaten in einer Zeile (m², Gäste, Schlafzimmer), Bewertung direkt am Titel, klare Abschnitte mit Trennlinien.
+- **Buchungsfluss:** Suchleiste mit echtem Zeitraum-Kalender (zwei Monate, Bereichs-Vorschau beim Hovern) und Gäste-Auswahl (Erwachsene/Kinder/Kleinkinder, Maximum je Wohnung). Die Auswahl wird von der Startseite auf die Detailseite mitgenommen. Die Buchungskarte bleibt beim Scrollen sichtbar, mobil gibt es eine Leiste am unteren Rand und ein Bottom-Sheet.
+- **Filter:** Würzburg, Thüngen, Mit Hund, Für Familien, Bis 6 Personen. Gemerkte Wohnungen (Herz) werden im Browser gespeichert.
+- **Typo:** eine Schrift (Plus Jakarta Sans), große, eng gesetzte Headlines.
+- **Farben:** warmes Off-White `#fbfaf8`, Tinte `#16140f`, Akzent Bocksbeutel-Grün `#1f3b2d`, Eiche `#9a6a3a` nur sparsam.
+- **Details:** weiche, mehrlagige Schatten, 1-px-Konturen statt harter Rahmen, Bilder blenden beim Laden ein, Herz-„Pop“, Stepper-Bump, gezeichneter Haken bei der Erfolgsmeldung.
 - `prefers-reduced-motion` wird respektiert, alles ist per Tastatur bedienbar.
+
+## Fotos
+
+`plugins/fetch-photos` lädt beim Netlify-Build Fotos und legt sie unter `assets/photos/<slot>-960.jpg` / `-1920.jpg` ab:
+
+- **Würzburg, Weinberge, Schloss Thüngen, Eichenholz:** echte Motive von Wikimedia Commons (CC-Lizenzen). Urheber und Lizenz werden automatisch in `credits.json` geschrieben und im Footer unter „Bildnachweise“ angezeigt.
+- **Innenräume:** **Beispielbilder von Unsplash** – nicht die echten Wohnungen. Darauf weist der Hinweisbalken oben auf der Seite hin.
+
+**Echte Fotos einsetzen:** Datei unter dem Slot-Namen nach `assets/photos/` legen (beide Größen) und committen – das Plugin überschreibt vorhandene Dateien nicht. Die Fotos der Gastgeber liegen u. a. auf Booking.com und FeWo-direkt. Danach den Hinweisbalken (`.preview-bar`) entfernen.
 
 ## SEO-Maßnahmen
 
@@ -72,9 +76,7 @@ fewo-relaunch/
 ## Vor dem Go-live erledigen
 
 ### Fotos
-Alle Bildflächen sind **Platzhalter** (`<div class="ph ...">`). Zum Austausch ersetzt man sie durch
-`<img src="..." alt="..." width=".." height=".." loading="lazy" class="ph">`. Die Hero-Bilder bekommen kein `loading="lazy"`.
-Dazu braucht es zwei OG-Bilder (1200×630): `assets/img/og-home.png` und `assets/img/og-wuerzburg.png`.
+Innenraum-Beispielbilder durch echte Fotos der Wohnungen ersetzen (siehe *Fotos*), Hinweisbalken entfernen.
 
 ### Anfrageformular
 Es ist für **Netlify Forms** vorbereitet (`data-netlify="true"`, Honeypot) und funktioniert dort ohne Backend.
@@ -95,7 +97,8 @@ Die Inhalte stammen aus Suchergebnissen zu fewo-urlaub.com, Booking.com und FeWo
 | Zweite Würzburg-Seite nennt Innerer Graben 12, 60 m² | widersprüchlich – andere Wohnung? |
 | Wohnung „Kulturspeicher“ Würzburg | unklar, ob noch aktiv |
 | Thüngen: Elefant/Zebra bis 6, Giraffe bis 4 Gäste | fewo-urlaub.com (FeWo-direkt nennt Zebra bis 4) |
-| Blauer Reiter: max. Gästezahl | unbekannt – im Formular vorerst bis 6 |
+| Blauer Reiter: max. Gästezahl | unbekannt – vorerst ohne Angabe |
+| 9,1 (Booking.com) auf allen Thüngen-Karten | gilt für das ganze Haus „Wohnen am Schlossberg“, nicht je Wohnung |
 | Check-in 15 Uhr / Check-out 11 Uhr | Booking.com + fewo-urlaub.com |
 | 9,1/10 Booking.com (26 Bew.), 9,6/10 FeWo-direkt | Stand Okt. 2026, regelmäßig aktualisieren |
 | „150+ Jahre“, FSC seit 2004 | hugokaempf.de (an anderer Stelle „über 145 Jahre“) |

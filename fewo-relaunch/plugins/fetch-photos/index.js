@@ -27,10 +27,8 @@ const SLOTS = {
   "wue-bridge": [c("Alte Mainbrücke Würzburg 20180521 004.jpg"), c("View of the old bridge over Main in Wurzburg 01.jpg"), c("Würzburg, die Alte Mainbrücke.JPG")],
   "wue-festung": [c("Wurzburg Marienberg Fortress on the Main in Würzburg.jpg"), c("Würzburg; Festung Marienberg.jpg"), c("Marienberg wuerzburg.jpg")],
   "wue-residenz": [c("Würzburg Residenz Weltkulturerbe und Hofgarten.jpg"), c("Wuerzburger Residenz vom Hofgarten.jpg"), c("Residenz Wuerzburg Hofgarten.jpg")],
-  "wue-hofgarten": [c("Würzburg, Residenz, Hofgarten -- 2018 -- 0181.jpg"), c("Orangerie Hofgarten Wuerzburg-1.jpg")],
   "wue-main": [c("Main Kutter Würzburg.jpg"), c("View of the old bridge over Main in Wurzburg 01.jpg")],
   "wein-stein": [c("Würzburger Stein.jpg"), u("1506377247377-2a5b3b417ebb")],
-  "wein-bocksbeutel": [c("Franken Silvaner in Bocksbeutel.jpg"), c("Bocksbeutel.jpg"), u("1510812431401-41d2bd2722f3")],
   "thue-schloss": [c("Schloss Thüngen April 2021 05.jpg"), c("Thüngen, Schloss-001.jpg"), c("Schloss Thüngen.jpg")],
   "oak-wood": [c("Eiche (Holz).JPG"), c("Eichenholz.jpg")],
   // Innenräume = Beispielbilder, bis echte Fotos der Wohnungen vorliegen
@@ -110,26 +108,6 @@ module.exports = {
     const total = Object.keys(SLOTS).length;
     const summary = `${total - missing.length}/${total} Fotos geladen.` + (missing.length ? ` Fehlend (Platzhalter): ${missing.join(", ")}` : "");
     console.log(summary);
-    const report = [];
-    // Optional: Fotos zur visuellen Kontrolle in eine Figma-Datei hochladen (einmalige Upload-URLs per Env-Var)
-    const checkFile = path.join(__dirname, "check.json");
-    const check = fs.existsSync(checkFile) ? JSON.parse(fs.readFileSync(checkFile, "utf8")) : {};
-    if (check.urls) {
-      const urls = check.urls;
-      const slots = Object.keys(SLOTS).filter((sl) => fs.existsSync(path.join(OUT, `${sl}-${SIZES[0]}.jpg`)));
-      await Promise.all(slots.slice(0, urls.length).map(async (sl, i) => {
-        try {
-          const form = new FormData();
-          form.append("file", new Blob([fs.readFileSync(path.join(OUT, `${sl}-${SIZES[0]}.jpg`))], { type: "image/jpeg" }), `${sl}.jpg`);
-          const r = await fetch(urls[i], { method: "POST", body: form });
-          report.push(`${sl}:${r.status}${r.ok ? "" : " " + (await r.text()).slice(0, 120)}`);
-        } catch (e) {
-          report.push(`${sl}:ERR ${e.message}`);
-        }
-      }));
-    }
     utils.status.show({ title: "Fotos", summary, text: JSON.stringify(credits) });
-    // Diagnose: Build bewusst abbrechen, damit das Ergebnis in der Deploy-Fehlermeldung steht (Live-Seite bleibt unverändert)
-    if (check.report) utils.build.failBuild(`REPORT ${summary} | Figma: ${report.join("; ") || "keine URLs"} | Credits: ${Object.entries(credits).map(([k, v]) => k + "=" + v.title).join("; ")}`);
   },
 };
