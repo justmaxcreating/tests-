@@ -398,7 +398,7 @@
   });
 
   /* ---------- Formulare (Netlify Forms, lokal Demo-Modus) ---------- */
-  const isDemo = location.protocol === "file:" || /^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname);
+  const isDemo = location.protocol === "file:" || /^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname) || /\.github\.io$/.test(location.hostname); // GitHub Pages: kein Netlify Forms
   $$("form[data-inquiry]").forEach((form) => {
     const status = $(".form-status", form);
     form.addEventListener("submit", async (e) => {
