@@ -6,7 +6,7 @@ Fotos: assets/fewo/<id>/NN.jpg (echte Fotos der Gastgeber, Reihenfolge = Reihenf
 """
 import math
 
-from reviews import CHECKS, REVIEWS, SOURCE
+from reviews import CHECKS, QUOTES, REVIEWS, SOURCE
 
 # ---------- Orte für Entfernungen und Karten (per Nominatim ermittelt) ----------
 LANDMARKS = {
@@ -386,6 +386,7 @@ def finalize(a):
     a["review"] = REVIEWS.get(a["id"])
     a["rating"] = (a["review"]["score"], SOURCE) if a["review"] else None
     a["checks"] = CHECKS.get(a["id"], [])
+    a["quotes"] = QUOTES.get("thuengen" if a["city"] == "thuengen" else a["id"], [])
     if a["city"] == "wuerzburg":
         keys = ["dom", "markt", "bruecke", "residenz", "kranen", "hbf", "ccw", "theater"] + ([] if a["parking"] == "own" else ["talavera"])
         d = [(LANDMARKS[k][0], *walk(a["geo"], LANDMARKS[k][1:]), k) for k in keys]

@@ -66,6 +66,20 @@ REVIEWS = {
 for _id in ("thue-elefant", "thue-zebra", "thue-giraffe", "thue-blauer-reiter"):
     REVIEWS[_id] = THUENGEN
 
+# Gästezitate: wörtlich aus den Booking-Bewertungen, je Eintrag (Zitat, Vorname, Land).
+# Das erste Zitat einer Wohnung steht groß oben auf ihrer Seite und auf der Startseite, die übrigen im
+# Bereich „Was Gäste sagen“. Leere Liste = kein Zitat-Bereich. "thuengen" gilt für alle vier Thüngen-Wohnungen.
+# Beispiel:  "wue-herzstueck": [("Hier der Satz aus der Bewertung.", "Vorname", "Deutschland")],
+QUOTES = {
+    "wue-herzstueck": [],
+    "wue-im-herzen": [],
+    "wue-julius-1": [],
+    "wue-kulturspeicher": [],
+    "wue-ringpark": [],
+    "wue-baeckerbrunnen": [],
+    "thuengen": [],
+}
+
 # Offene Prüfpunkte je Wohnung (Seite) – siehe Docstring
 CHECKS = {
     "wue-herzstueck": ["Aufzug: Mehrere Booking-Gäste nennen einen Aufzug (für sie ausschlaggebend). Die alte Website sagt „kein Aufzug“."],
@@ -81,6 +95,6 @@ CHECKS = {
     "thuengen": ["Hunde: Das Booking-Inserat „Wohnen am Schlossberg“ sagt „Haustiere nicht gestattet“. Die alte Website und eine Gästin sagen hundefreundlich – diese Seite wirbt damit."],
 }
 
-UWG_NOTE = (f"Noten und Anzahl der Bewertungen von {SOURCE}, Stand {AS_OF}. Auf {SOURCE} können nur Gäste bewerten, "
+UWG_NOTE = (f"Noten, Anzahl und Zitate stammen aus Bewertungen auf {SOURCE}, Stand {AS_OF}. Auf {SOURCE} können nur Gäste bewerten, "
             "die über die Plattform gebucht und übernachtet haben; eine eigene Prüfung der Bewertungen nehmen wir nicht vor. "
             "Die Stichpunkte sind unsere Zusammenfassung in eigenen Worten.")

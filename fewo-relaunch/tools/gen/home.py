@@ -27,9 +27,11 @@ def review_items():
         seen.add(rv["url"])
         name = "Wohnen am Schlossberg" if a["city"] == "thuengen" else a["name"]
         path = "thuengen/" if a["city"] == "thuengen" else a["path"]
-        items.append(dict(score=rv["score"], name=name, place=a["town"], count=rv["count"], path=path,
-                          text=f"{rv['praise'][0]}. {rv['praise'][1]}."))
-    return sorted(items, key=lambda r: -float(r["score"].replace(",", ".")))
+        q = a["quotes"][0] if a["quotes"] else None
+        items.append(dict(score=rv["score"], name=name, place=a["town"], count=rv["count"], path=path, quote=bool(q),
+                          who=f"{q[1]} · {q[2]}" if q else "",
+                          text=f"„{q[0]}“" if q else f"{rv['praise'][0]}. {rv['praise'][1]}."))
+    return sorted(items, key=lambda r: (not r["quote"], -float(r["score"].replace(",", "."))))
 
 
 MARQUEE = ["Check-in ab 15 Uhr", "Hunde in Thüngen willkommen", "Kostenloses WLAN", "Parken am Haus in Thüngen",
@@ -63,7 +65,7 @@ def review_card(r):
     return f"""            <a class="rv-card" href="{r["path"]}">
               <div class="rv-score"><strong>{r["score"]}</strong><span>/ 10</span>{icon("star", 14)}</div>
               <p class="rv-text">{r["text"]}</p>
-              <span class="rv-cap"><span class="rv-src">B</span><span><strong>{r["name"]}</strong><br>{r["count"]} Bewertungen · {SOURCE}</span><span class="rv-note">Zusammenfassung</span></span>
+              <span class="rv-cap"><span class="rv-src">B</span><span><strong>{r["who"] or r["name"]}</strong><br>{r["name"] + " · " if r["who"] else ""}{r["count"]} Bewertungen · {SOURCE}</span>{"" if r["quote"] else '<span class="rv-note">Zusammenfassung</span>'}</span>
             </a>"""
 
 

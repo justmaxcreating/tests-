@@ -192,6 +192,16 @@ def build(a):
           <p><strong>{rv["count"]} Bewertungen auf {SOURCE}</strong>{scope}.<br>Am besten bewertet: {", ".join(f"{c} {v}" for c, v in rv["cats"][:2])}</p>
           {icon("right", 22)}
         </a>"""
+        qs = a["quotes"]
+        if qs:
+            t, who, land = qs[0]
+            score += f"""
+        <figure class="pull-quote">
+          <blockquote>„{t}“</blockquote>
+          <figcaption><strong>{who}</strong> · {land} · Bewertung auf {SOURCE}</figcaption>
+        </figure>"""
+        more_q = "".join(f'<figure class="q-card"><blockquote>„{t}“</blockquote><figcaption><strong>{who}</strong> · {land}</figcaption></figure>' for t, who, land in qs[1:])
+        more_q = f'<div class="q-grid">{more_q}</div>' if more_q else ""
         praise = "".join(f"<li>{icon('check', 18)}<span>{t}</span></li>" for t in rv["praise"])
         cats = "".join(f'<li><span>{c}</span><span class="rv-bar"><i style="width:{float(v.replace(",", ".")) * 10:.0f}%"></i></span><strong>{v}</strong></li>' for c, v in rv["cats"])
         heads = f'<p class="rv-heads">{icon("chat", 18)}<span><strong>Gut zu wissen aus den Bewertungen:</strong> {rv["heads_up"]}</span></p>' if rv["heads_up"] else ""
@@ -202,6 +212,7 @@ def build(a):
           <div class="rv-big"><strong>{rv["score"]}</strong><span>von 10</span><small>{rv["count"]} Bewertungen<br>auf {SOURCE}</small></div>
           <ul class="rv-cats">{cats}</ul>
         </div>
+        {more_q}
         <h3 class="rv-sub">Das heben Gäste besonders hervor</h3>
         <ul class="rv-praise">{praise}</ul>
         {heads}
