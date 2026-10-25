@@ -29,9 +29,9 @@ REVIEWS = {
     "wue-herzstueck": dict(
         score="9,2", count=40, url="https://www.booking.com/hotel/de/wohnen-im-riemenschneiderhaus.html",
         cats=[("Lage", "9,9"), ("Gastgeber", "9,9"), ("WLAN", "10")],
-        praise=["Mitten in der Altstadt, wenige Schritte zu Dom und Alter Mainbrücke", "Trotz der zentralen Lage ruhig",
+        praise=["Mitten in der Altstadt, wenige Schritte zu Dom und Alter Mainbrücke", "Hell, sehr sauber, großzügig geschnitten",
                 "Große Dusche und gut ausgestattete Küche", "Gastgeber reagieren schnell und freundlich"],
-        heads_up=None),
+        heads_up="Die Wohnung liegt in einer Altstadtgasse – nachts kann es durch Passanten lauter werden. Rollläden verdunkeln gut."),
     "wue-im-herzen": dict(
         score="8,9", count=25, url="https://www.booking.com/hotel/de/wohnen-im-herzen-der-altstadt.html",
         cats=[("Lage", "9,4"), ("Gastgeber", "9,3"), ("WLAN", "10")],
@@ -66,12 +66,19 @@ REVIEWS = {
 for _id in ("thue-elefant", "thue-zebra", "thue-giraffe", "thue-blauer-reiter"):
     REVIEWS[_id] = THUENGEN
 
-# Gästezitate: wörtlich aus den Booking-Bewertungen, je Eintrag (Zitat, Vorname, Land).
+# Gästezitate: wörtlich aus den Booking-Bewertungen, je Eintrag (Zitat, Vorname, Land, Aufenthalt).
 # Das erste Zitat einer Wohnung steht groß oben auf ihrer Seite und auf der Startseite, die übrigen im
 # Bereich „Was Gäste sagen“. Leere Liste = kein Zitat-Bereich. "thuengen" gilt für alle vier Thüngen-Wohnungen.
-# Beispiel:  "wue-herzstueck": [("Hier der Satz aus der Bewertung.", "Vorname", "Deutschland")],
+# Beispiel:  "wue-herzstueck": [("Hier der Satz aus der Bewertung.", "Vorname", "Deutschland", "Mai 2025")],
+# Kürzungen im Zitat mit […] kennzeichnen. Zitate, die einem offenen Prüfpunkt widersprechen (z. B. Aufzug),
+# erst eintragen, wenn der Punkt geklärt ist.
 QUOTES = {
-    "wue-herzstueck": [],
+    "wue-herzstueck": [
+        ("Hell, blitzsauber, freundlich, wenige Meter bis zum Stadtzentrum (Dom); W-LAN-Zugang, einfach alles ganz prima. Ein schöner Aufenthalt. Wir kommen wieder!", "Godela", "Deutschland", "Mai 2025"),
+        ("Die Lage mitten in der Altstadt ist super. Man ist mit wenigen Schritten im Zentrum von Würzburg. Bei der Ausstattung fehlt nichts. […] Wir haben uns sehr wohl gefühlt.", "Moormann", "Deutschland", "Mai 2026"),
+        ("Wunderschöne, gut eingerichtete, gepflegte Wohnung mit Ausblick auf die Balthasar Neumann Kanzel, perfekt gelegen: in ein paar Schritten am Dom und an der Brücke …", "Wolfgang", "Deutschland", "Dezember 2023"),
+        ("Super, mitten in der Altstadt. Konnten alles zu Fuß oder mit den Öffis erreichen. Großzügige Ferienwohnung mit allem was man so braucht.", "Marion", "Deutschland", "September 2025"),
+    ],
     "wue-im-herzen": [],
     "wue-julius-1": [],
     "wue-kulturspeicher": [],

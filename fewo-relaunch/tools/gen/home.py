@@ -29,7 +29,7 @@ def review_items():
         path = "thuengen/" if a["city"] == "thuengen" else a["path"]
         q = a["quotes"][0] if a["quotes"] else None
         items.append(dict(score=rv["score"], name=name, place=a["town"], count=rv["count"], path=path, quote=bool(q),
-                          who=f"{q[1]} · {q[2]}" if q else "",
+                          who=f"{q[1]} · {q[2]} · {q[3]}" if q else "",
                           text=f"„{q[0]}“" if q else f"{rv['praise'][0]}. {rv['praise'][1]}."))
     return sorted(items, key=lambda r: (not r["quote"], -float(r["score"].replace(",", "."))))
 

@@ -194,13 +194,13 @@ def build(a):
         </a>"""
         qs = a["quotes"]
         if qs:
-            t, who, land = qs[0]
+            t, who, land, when = qs[0]
             score += f"""
         <figure class="pull-quote">
           <blockquote>„{t}“</blockquote>
-          <figcaption><strong>{who}</strong> · {land} · Bewertung auf {SOURCE}</figcaption>
+          <figcaption><strong>{who}</strong> · {land} · Aufenthalt {when} · Bewertung auf {SOURCE}</figcaption>
         </figure>"""
-        more_q = "".join(f'<figure class="q-card"><blockquote>„{t}“</blockquote><figcaption><strong>{who}</strong> · {land}</figcaption></figure>' for t, who, land in qs[1:])
+        more_q = "".join(f'<figure class="q-card"><blockquote>„{t}“</blockquote><figcaption><strong>{who}</strong> · {land} · {when}</figcaption></figure>' for t, who, land, when in qs[1:])
         more_q = f'<div class="q-grid">{more_q}</div>' if more_q else ""
         praise = "".join(f"<li>{icon('check', 18)}<span>{t}</span></li>" for t in rv["praise"])
         cats = "".join(f'<li><span>{c}</span><span class="rv-bar"><i style="width:{float(v.replace(",", ".")) * 10:.0f}%"></i></span><strong>{v}</strong></li>' for c, v in rv["cats"])
